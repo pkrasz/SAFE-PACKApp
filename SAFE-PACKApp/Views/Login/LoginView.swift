@@ -56,14 +56,26 @@ final class LoginView: BaseView {
     
     let pageViews: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         let pages = UICollectionView(frame: .zero, collectionViewLayout: layout)
         pages.translatesAutoresizingMaskIntoConstraints = false
         pages.backgroundColor = Color.white
-        layout.scrollDirection = .horizontal
         pages.showsHorizontalScrollIndicator = false
         pages.isPagingEnabled = true
         return pages
     }()
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        activityIndicator.color = Color.font
+        activityIndicator.isHidden = true
+        return activityIndicator
+    }()
+    
     
     //MARK: - Setup
     
@@ -72,12 +84,13 @@ final class LoginView: BaseView {
     }
     
     override func setupSubviews() {
-        addSubview(pageViews)
-        addSubview(backgroundImageView)
-        addSubview(headerSignInButton)
-        addSubview(headerGetStartedButton)
-        addSubview(leftActivityBar)
-        addSubview(rightActivityBar)
+        [pageViews,
+         backgroundImageView,
+         headerSignInButton,
+         headerGetStartedButton,
+         leftActivityBar,
+         rightActivityBar,
+        activityIndicatorView].forEach(addSubview)
         
     }
     
@@ -109,8 +122,27 @@ final class LoginView: BaseView {
             pageViews.topAnchor.constraint(equalTo: headerSignInButton.bottomAnchor),
             pageViews.leadingAnchor.constraint(equalTo: leadingAnchor),
             pageViews.trailingAnchor.constraint(equalTo: trailingAnchor),
-            pageViews.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.pageViewsBottom)
+            pageViews.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.pageViewsBottom),
+            
+            activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+    
+    // MARK: - Methods
+    
+    func setupLogin() {
+        headerSignInButton.setTitleColor(Color.darkGreen, for: .normal)
+        headerGetStartedButton.setTitleColor(Color.lightGreen, for: .normal)
+        rightActivityBar.isHidden = true
+        leftActivityBar.isHidden = false
+    }
+    
+    func setupRegister() {
+        headerGetStartedButton.setTitleColor(Color.darkGreen, for: .normal)
+        headerSignInButton.setTitleColor(Color.lightGreen, for: .normal)
+        rightActivityBar.isHidden = false
+        leftActivityBar.isHidden = true
     }
 }
 

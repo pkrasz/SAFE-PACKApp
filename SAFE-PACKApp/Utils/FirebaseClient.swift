@@ -7,62 +7,104 @@
 
 import Foundation
 import Firebase
-import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import UIKit
+import FirebaseStorage
+import FirebaseStorageSwift
 
 final class FirebaseClient {
     
     // MARK: - Properties
     
     static var shared = FirebaseClient()
-    private var auth: Auth?
     private var db: Firestore?
+    private var storage: Storage?
+    private var storageRef: StorageReference?
     
     func setupClient() {
         FirebaseApp.configure()
-        auth = .auth()
         db = .firestore()
+        storage = .storage()
+        storageRef = storage?.reference()
     }
     
-    func createUser(email: String, password: String, view: UIViewController, pushView: UIViewController, navigationController: UINavigationController) {
-        auth?.createUser(withEmail: email, password: password) { result, error in
-            if error != nil {
-                guard let error = error else {return}
-                view.showAlert(title: "Error!", message: error.localizedDescription, actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
-            } else {
-                navigationController.pushViewController(pushView, animated: true)
-            }
-            
+    func addOrder(userUID: String, with order: Order, completion: @escaping (Bool) -> Void) {
+       
+        let orderID = String(order.orderNumber)
+        
+        do {
+            try db?.collection(userUID).document(orderID).setData(from: order)
+            completion(true)
+        } catch let error {
+            print("Error writing city to Firestore: \(error)")
+            completion(false)
         }
     }
-    func signIn(email: String, password: String, view: UIViewController, pushView: UIViewController, navigationController: UINavigationController) {
-        auth?.signIn(withEmail: email, password: password, completion: { result, error in
-            if error != nil {
-                guard let error = error else {return}
-                view.showAlert(title: "Error!", message: error.localizedDescription, actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
-            } else {
-                navigationController.pushViewController(pushView, animated: true)
+    
+    func createUserInfo(userUID: String, name: String, NIP: Int, address: String) {
+        db?.collection(userUID)
+            .document("accountInfo").setData(["companyName" : name, "NIP" : NIP, "address" : address])
+    }
+    
+    func updateUserInfo(userUID: String, name: String, NIP: Int, address: String) {
+        db?.collection(userUID)
+            .document("accountInfo").updateData(["companyName" : name, "NIP" : NIP, "address" : address])
+    }
+    
+    func getAccountInfo(userUID: String, completion: @escaping (UserInfo) -> Void) {
+        db?.collection(userUID).document("accountInfo").getDocument(as: UserInfo.self) { result in
+            switch result {
+            case.success(let userInfo):
+                completion(userInfo)
+            case.failure(let error):
+                print("ERROR! : \(error)")
             }
-        })
+        }
     }
     
-    func createOrder(with title: String) {
-        db?.collection(auth?.currentUser?.uid ?? "")
-            .addDocument(data: ["title": title])
+    func getProducts(completion: @escaping ([Product]) -> Void) {
+        
+        db?.collection("Products").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var products: [Product] = []
+                for document in querySnapshot!.documents {
+                    let doc = try? document.data(as: Product.self)
+                    guard let doc = doc else {return}
+                    products.append(doc)
+                }
+                completion(products)
+            }
+        }
     }
     
-    func addNewPackage() {
-        db?.collection("Product/Dupa/Cos")
-            .addDocument(data: ["title": "ttest"])
+    func setImage(name: String, completion: @escaping (UIImage?) -> Void) {
+        //        let storage = Storage.storage()
+        let fileName: String = "images/\(name).png"
+        let imagesRef = storageRef?.child(fileName)
+        imagesRef?.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                let image = UIImage(data: data!)
+                completion(image)
+            }
+        }
     }
-    
-    func allOrders(completion: ([String]) -> Void) {
-        //        db?.collection("orders").getDocuments(completion: { snapshot, error in
-        //            debugPrint(snapshot?.documents.map { $0.data() } )
-        //            debugPrint(error)
-        //        })
-    }
-    
 }
+
+//    func addNewPackage() {
+//        db?.collection("Product/Dupa/Cos")
+//            .addDocument(data: ["title": "ttest"])
+//        print("POSLZO COS TAM")
+//    }
+
+//    func allOrders(completion: ([String]) -> Void) {
+//        //        db?.collection("orders").getDocuments(completion: { snapshot, error in
+//        //            debugPrint(snapshot?.documents.map { $0.data() } )
+//        //            debugPrint(error)
+//        //        })
+//    }
+//

@@ -98,7 +98,7 @@ final class WelcomeView: BaseView {
         
         logoTopAnchor?.constant = LogoTopAnchor.welcome
         
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: 0.5) {
             self.layoutIfNeeded()
         } completion: { _ in
             self.loginButton.isHidden = false

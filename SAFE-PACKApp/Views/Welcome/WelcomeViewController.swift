@@ -9,16 +9,20 @@ import UIKit
 
 final class WelcomeViewController: BaseViewController<WelcomeView> {
     
+    //MARK: - Lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let loginStatus = UserSession.shared.loginStatus()
+        if loginStatus == true {
+            navigationController?.pushViewController(AccountInterfaceViewController(), animated: false)
+        }
+    }
+    
     //MARK: - Setup
     
     override func setupView() {
-//        FirebaseClient.shared.signIn(email: "dupa@fdupa2.pl", password: "test3245")
-//        FirebaseClient.shared.createOrder(with: "DUpa Blada2")
-//        FirebaseClient.shared.allOrders { _ in }
-//        FirebaseClient.shared.addNewPackage()
-//        FirebaseClient.shared.addNewPackage()
-//        FirebaseClient.shared.addNewPackage()
-
         navigationController?.isNavigationBarHidden = true
         navigationItem.hidesBackButton = true
         navigationController?.navigationBar.isUserInteractionEnabled = false

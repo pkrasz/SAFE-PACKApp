@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginData {
-    func loginData(button: String, email: String, password: String, repeatPassword: String)
+    func loginData(email: String, password: String, repeatPassword: String)
 }
 
 class LoginCollectionViewCell: UICollectionViewCell {
@@ -16,6 +16,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties
     
     static let identifier = "LoginCollectionViewCell "
+    var delegateLoginData: LoginData?
+    
+    //MARK: - Subview
     
     let headLabel: UILabel = {
         let label = UILabel()
@@ -98,15 +101,14 @@ class LoginCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    var delegateLoginData: LoginData?
+   
     
     //MARK: - Initializator
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupView()
-        setupSubview()
+        setupSubviews()
         setupConstraints()
         setupBindings()
     }
@@ -115,19 +117,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Lifecycle
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    
     //MARK: - Setup
-    private func setupView() {
-        backgroundColor = Color.white
-    }
     
-    private func setupSubview() {
+    private func setupSubviews() {
         
         addSubview(headLabel)
         addSubview(emailTextField)
@@ -179,11 +171,15 @@ class LoginCollectionViewCell: UICollectionViewCell {
     
     func setupBindings() {
         let tapButton = UIAction{ [unowned self] _ in
-            delegateLoginData?.loginData(button: loginButton.titleLabel?.text ?? "", email: emailTextField.text ?? "", password: passwordTextField.text ?? "", repeatPassword: repeatPasswordTextField.text ?? "")
+            delegateLoginData?.loginData(
+                email: emailTextField.text ?? "",
+                password: passwordTextField.text ?? "",
+                repeatPassword: repeatPasswordTextField.text ?? ""
+            )
         }
         loginButton.addAction(tapButton, for: .touchUpInside)
     
-}
+    }
 }
 
 extension LoginCollectionViewCell {

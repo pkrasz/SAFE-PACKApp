@@ -7,25 +7,32 @@
 
 import UIKit
 
+enum AuthorizationType: Int {
+    case login = 0
+    case register = 1
+}
+
 final class LoginViewController: BaseViewController<LoginView> {
     
     
     //MARK: - Properties
     
-    var currentPage = 0 {
+    var autorizationType: AuthorizationType = .login {
         didSet {
-            if currentPage == 0 {
-                contentView.headerSignInButton.setTitleColor(Color.darkGreen, for: .normal)
-                contentView.headerGetStartedButton.setTitleColor(Color.lightGreen, for: .normal)
-                contentView.rightActivityBar.isHidden = true
-                contentView.leftActivityBar.isHidden = false
-            } else {
-                contentView.headerGetStartedButton.setTitleColor(Color.darkGreen, for: .normal)
-                contentView.headerSignInButton.setTitleColor(Color.lightGreen, for: .normal)
-                contentView.rightActivityBar.isHidden = false
-                contentView.leftActivityBar.isHidden = true
+            switch autorizationType {
+            case .login:
+                contentView.setupLogin()
+            case .register:
+                contentView.setupRegister()
             }
         }
+    }
+    
+    //MARK: - Lifecyce
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        contentView.pageViews.reloadData()
     }
     
     //MARK: - Setup
@@ -38,6 +45,7 @@ final class LoginViewController: BaseViewController<LoginView> {
         navigationController?.navigationBar.barStyle = UIBarStyle.black
         navigationController?.navigationBar.tintColor = Color.white
         
+//        contentView.activityIndicatorView.isHidden = true
         contentView.pageViews.dataSource = self
         contentView.pageViews.delegate = self
         contentView.pageViews.register(LoginCollectionViewCell.self, forCellWithReuseIdentifier: LoginCollectionViewCell.identifier)
@@ -46,16 +54,14 @@ final class LoginViewController: BaseViewController<LoginView> {
     override func setupBindings() {
         
         let signInButtonTapped = UIAction{ [unowned self] _ in
-            let rect = self.contentView.pageViews.layoutAttributesForItem(at: IndexPath(row: 0, section: 0))?.frame
-            self.contentView.pageViews.scrollRectToVisible(rect!, animated: true)
-            currentPage = 0
+            self.contentView.pageViews.scrollToItem(at: .init(item: 0, section: 0), at: .left, animated: true)
+            autorizationType = .login
         }
         contentView.headerSignInButton.addAction(signInButtonTapped, for: .touchUpInside)
         
         let getStartedButtonTapped = UIAction{ [unowned self] _ in
-            let rect = self.contentView.pageViews.layoutAttributesForItem(at: IndexPath(row: 1, section: 0))?.frame
-            self.contentView.pageViews.scrollRectToVisible(rect!, animated: true)
-            currentPage = 1
+            self.contentView.pageViews.scrollToItem(at: .init(item: 1, section: 0), at: .right, animated: true)
+            autorizationType = .register
         }
         contentView.headerGetStartedButton.addAction(getStartedButtonTapped, for: .touchUpInside)
         
@@ -69,8 +75,12 @@ extension LoginViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginCollectionViewCell.identifier, for: indexPath) as! LoginCollectionViewCell
+        let autorizationType = AuthorizationType(rawValue: indexPath.item)
         cell.delegateLoginData = self
-        if indexPath.row > 0 {
+        cell.emailTextField.text = nil
+        cell.passwordTextField.text = nil
+        cell.repeatPasswordTextField.text = nil
+        if autorizationType == .register {
             cell.headLabel.text = Labels.Text.headRegisterLabel
             cell.loginButton.setTitle(Buttons.Title.register, for: .normal)
             cell.forgetPasswordLabel.isHidden = true
@@ -88,22 +98,41 @@ extension LoginViewController: UICollectionViewDelegateFlowLayout {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
-        currentPage = Int(scrollView.contentOffset.x / width)
+        autorizationType = AuthorizationType(rawValue: Int(scrollView.contentOffset.x / width)) ?? .login
     }
 }
 
 extension LoginViewController: LoginData {
-    func loginData(button: String, email: String, password: String, repeatPassword: String) {
-        if button == Buttons.Title.login {
-            FirebaseClient.shared.signIn(email: email, password: password, view: self, pushView: AccountInterfaceViewController(), navigationController: navigationController!)
+    func loginData(email: String, password: String, repeatPassword: String) {
+        if autorizationType == .login {
+            contentView.activityIndicatorView.isHidden = false
+            UserSession.shared.logIn(email: email, password: password) { [weak self] error, logStatus in
+                if logStatus == false {
+                    self?.contentView.activityIndicatorView.isHidden = true
+                    self?.showAlert(title: "Error!", message: error, actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
+                } else {
+                    self?.contentView.activityIndicatorView.isHidden = true
+                    self?.navigationController?.popToRootViewController(animated: false)
+                }
+            }
         } else {
             if password == repeatPassword {
-                FirebaseClient.shared.createUser(email: email, password: password, view: self, pushView: AccountInfoViewController(), navigationController: navigationController!)
+                contentView.activityIndicatorView.isHidden = false
+                UserSession.shared.createUser(email: email, password: password) { [weak self] error, logStatus in
+                    if logStatus == false {
+                        self?.contentView.activityIndicatorView.isHidden = true
+                        self?.showAlert(title: "Error!", message: error, actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
+                    } else {
+                        let accountInfoViewController = AccountInfoViewController(newUser: true)
+                        self?.contentView.activityIndicatorView.isHidden = true
+                        self?.navigationController?.pushViewController(accountInfoViewController, animated: true)
+                    }
+                }
             } else {
-                showAlert(title: "Password problem", message: "Repeated password does not match", actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
+                showAlert(title: "Repeat password!", message: "Password does not match", actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
             }
         }
     }
 }
-    
-    
+
+
