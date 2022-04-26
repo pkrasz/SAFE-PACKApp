@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BasketView: BaseView {
+final class BasketView: BaseView {
 
     //MARK: - SubView
     
@@ -42,7 +42,6 @@ class BasketView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: Labels.Size.labelFont)
-        label.text = "3435235"
         label.textColor = Color.font
         return label
     }()
@@ -138,28 +137,22 @@ class BasketView: BaseView {
     
     //MARK: - Setup
     
-    override func setupView() {
-
-        [backgroundImageView,
-        infoBackground,
-         orderNumberTitleLabel,
-        orderNumberLabel,
-        orderAmountTitleLabel,
-        orderAmountLabel,
-        leadTimeTitleLabel,
-        leadTimeLabel,
-        deliveryAddressTitleLabel,
-        deliveryAddressLabel,
-        lineImage,
-        orderTableView,
-        completeOrderButton,
-        activityIndicatorView]
-            .forEach(addSubview)
-        
-    }
-    
     override func setupSubviews() {
-        
+        [backgroundImageView,
+           infoBackground,
+            orderNumberTitleLabel,
+           orderNumberLabel,
+           orderAmountTitleLabel,
+           orderAmountLabel,
+           leadTimeTitleLabel,
+           leadTimeLabel,
+           deliveryAddressTitleLabel,
+           deliveryAddressLabel,
+           lineImage,
+           orderTableView,
+           completeOrderButton,
+           activityIndicatorView]
+               .forEach(addSubview)
     }
     
     override func setupConstraints() {
@@ -175,7 +168,7 @@ class BasketView: BaseView {
             
             orderNumberLabel.topAnchor.constraint(equalTo: orderNumberTitleLabel.bottomAnchor, constant: 1),
             orderNumberLabel.leadingAnchor.constraint(equalTo: orderNumberTitleLabel.leadingAnchor),
-            orderNumberLabel.trailingAnchor.constraint(equalTo: orderNumberTitleLabel.trailingAnchor),
+            orderNumberLabel.trailingAnchor.constraint(greaterThanOrEqualTo: orderNumberTitleLabel.trailingAnchor),
             
             orderAmountTitleLabel.topAnchor.constraint(equalTo: orderNumberLabel.bottomAnchor, constant: 10),
             orderAmountTitleLabel.leadingAnchor.constraint(equalTo: orderNumberTitleLabel.leadingAnchor),
@@ -214,9 +207,10 @@ class BasketView: BaseView {
             completeOrderButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             completeOrderButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
             completeOrderButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
-            completeOrderButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor)
+            completeOrderButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
-            
+            activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

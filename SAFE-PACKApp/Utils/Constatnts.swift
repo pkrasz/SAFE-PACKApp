@@ -24,6 +24,9 @@ enum Image {
     static let accountInterfaceBackground: UIImage = UIImage(named: "accountInterfaceBackground")!
     static let dottedFrame: UIImage = UIImage(named: "dottedFrame")!
     static let accountBackgroundTwo: UIImage = UIImage(named: "accountBackgroundTwo")!
+    static let availability: UIImage = UIImage(systemName: "circle.inset.filled")!
+    static let backgroundFour: UIImage = UIImage(named: "backgroundFour")!
+    static let eye: UIImage = UIImage(systemName: "eye.fill")!
 }
 
 enum Buttons {
@@ -39,9 +42,11 @@ enum Buttons {
         static let yourOrders: String = "Your orders"
         static let logOut: String = "Log out"
         static let completeOrder: String = "Complete order"
-        static let showInvoice: String = "Show invoice"
+        static let invoice: String = "Invoice"
+        static let proforma: String = "Proforma"
         static let saveToPhone: String = "Save to phone"
         static let approve: String = "Approve"
+        static let resetPassword: String = "Reset password"
     }
     
     enum Size {
@@ -90,15 +95,15 @@ enum Labels {
         static let email: String = "E-mail"
         static let deliveryAddress: String = "Delivery address"
         static let NIP: String = "NIP"
-        static let unpaidInvoices: String = "Unpaid invoices :"
+        static let ordersAwaitingPayment: String = "Orders awaiting payment :"
         static let ordersInProgress: String = "Orders in progress :"
         static let orederNumber: String = "Order number"
         static let orderAmount: String = "Order amount"
         static let leadTime: String = "Lead time"
-        static let numberOfAllOrders: String = "Number of all orders"
-        static let numberOfComleteOrders: String = "Number of complete orders"
-        static let numberOfUnpaidOrders: String = "Number of unpaid orders"
-        static let numberOfOrdersInProgress: String = "Number of orders in progress"
+        static let numberOfAllOrders: String = "All orders"
+        static let numberOfAwaitingOrders: String = "Awaiting orders"
+        static let numberOfUnpaidOrders: String = "Unpaid orders"
+        static let numberOfOrdersInProgress: String = "Orders in progress"
         static let numberOfAllInvoices: String = "Number of all invoices"
         static let numberOfUnpaidinvoices: String = "Number of unpaid invoices"
         static let numberOfPaidInvoices: String = "Number of paid invoices"
@@ -107,10 +112,17 @@ enum Labels {
         static let recommended = "Packaging recommended for:"
         static let sizeOfPackage = "Size of the package:"
         static let sizesAdapted = "Sizes adapted to:"
+        static let dateBig = "Date"
+        static let status = "Status"
         static let size = "size:"
         static let price = "price: "
-        static let amount = "amount"
+        static let amount = "amount: "
         static let pln = " pln"
+        static let date = "date:"
+        static let slash = "/"
+        static let dash = "-"
+        static let resetYourPassword: String = "Reset your password"
+
     }
     
     enum Size {
@@ -127,10 +139,22 @@ enum LeadTime {
 }
 
 enum Status {
-    static let waiting: String = "Waiting for accepted"
+    static let awaitingAccepted: String = "Awaiting accepted"
     static let inProgress: String = "In progress"
     static let realized: String = "Realized"
+    static let awaitingPayment: String = "Awaiting payment"
+    static let unpaid: String = "Unpaid"
 }
+
+enum Identifire {
+    static let tableView: String = "UITableViewCell"
+}
+
+//enum Document {
+//    static let awaiting: Int = 0
+//    static let proforma: Int = 1
+//    static let invoice: Int = 2
+//}
 
 //enum Text {
 //    static let size: CGFloat = 24

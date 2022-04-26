@@ -5,11 +5,11 @@
 //  Created by Paweł Kraszewski on 06/04/2022.
 //
 
-import Foundation
+import UIKit
+import PDFKit
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import UIKit
 import FirebaseStorage
 import FirebaseStorageSwift
 
@@ -30,11 +30,11 @@ final class FirebaseClient {
     }
     
     func addOrder(userUID: String, with order: Order, completion: @escaping (Bool) -> Void) {
-       
+        
         let orderID = String(order.orderNumber)
         
         do {
-            try db?.collection(userUID).document(orderID).setData(from: order)
+            try db?.collection(userUID).document("ordersData").collection("orders").document(orderID).setData(from: order)
             completion(true)
         } catch let error {
             print("Error writing city to Firestore: \(error)")
@@ -64,7 +64,6 @@ final class FirebaseClient {
     }
     
     func getProducts(completion: @escaping ([Product]) -> Void) {
-        
         db?.collection("Products").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -80,11 +79,26 @@ final class FirebaseClient {
         }
     }
     
+    func getOrders(userID: String, completion: @escaping ([Order]) -> Void) {
+        db?.collection(userID).document("ordersData").collection("orders").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var orders: [Order] = []
+                for document in querySnapshot!.documents {
+                    let doc = try? document.data(as: Order.self)
+                    guard let doc = doc else {return}
+                    orders.append(doc)
+                }
+                completion(orders)
+            }
+        }
+    }
+    
     func setImage(name: String, completion: @escaping (UIImage?) -> Void) {
-        //        let storage = Storage.storage()
         let fileName: String = "images/\(name).png"
-        let imagesRef = storageRef?.child(fileName)
-        imagesRef?.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        let imageRef = storageRef?.child(fileName)
+        imageRef?.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -93,18 +107,45 @@ final class FirebaseClient {
             }
         }
     }
+    
+    func addInvoiceFolders(userName: String, userID: String, orderNumber: String) {
+        let data = Data()
+        let folderName: String = userName + Labels.Text.dash + userID
+        let ghostDocument: String = "invoices.txt"
+        let fileName: String = folderName + Labels.Text.slash + orderNumber + Labels.Text.slash + ghostDocument
+        let imageRef = storageRef?.child(fileName)
+        imageRef?.putData(data, metadata: nil) { (metadata, error) in
+            guard metadata != nil else {
+                guard let error = error else {return}
+                print(error.localizedDescription)
+                return
+            }
+            imageRef?.downloadURL { (url, error) in
+                guard url != nil else {
+                    guard let error = error else {return}
+                    print(error.localizedDescription)
+                    return
+                }
+            }
+        }
+    }
+    
+    func getInvoices(userName: String, userID: String, orderNumber: String, documentName: String, completion: @escaping (PDFDocument?) -> Void) {
+        let folderName: String = userName + Labels.Text.dash + userID
+        let fileName: String = folderName + Labels.Text.slash + orderNumber + Labels.Text.slash + documentName
+        let imageRef = storageRef?.child(fileName)
+        
+        imageRef?.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+                print("ERROR")
+                print(error)
+                print("FILE:")
+                print(fileName)
+            } else {
+                let image = PDFDocument(data: data!)
+                completion(image)
+            }
+        }
+    }
 }
-
-//    func addNewPackage() {
-//        db?.collection("Product/Dupa/Cos")
-//            .addDocument(data: ["title": "ttest"])
-//        print("POSLZO COS TAM")
-//    }
-
-//    func allOrders(completion: ([String]) -> Void) {
-//        //        db?.collection("orders").getDocuments(completion: { snapshot, error in
-//        //            debugPrint(snapshot?.documents.map { $0.data() } )
-//        //            debugPrint(error)
-//        //        })
-//    }
-//

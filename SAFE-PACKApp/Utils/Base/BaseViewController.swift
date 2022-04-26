@@ -8,7 +8,7 @@
 import UIKit
 
 class BaseViewController<View: BaseView>: UIViewController {
-
+    
     //MARK: - Properties
     
     var contentView: View {
@@ -32,4 +32,17 @@ class BaseViewController<View: BaseView>: UIViewController {
     
     func setupView() {}
     func setupBindings() {}
+    
+    //MARK: Methods
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
+

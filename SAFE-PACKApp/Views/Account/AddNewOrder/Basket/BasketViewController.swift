@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BasketViewController: BaseViewController<BasketView> {
+final class BasketViewController: BaseViewController<BasketView> {
     
     //MARK: - Properties
     
@@ -19,7 +19,10 @@ class BasketViewController: BaseViewController<BasketView> {
             
             if successful == true {
                 showAlert(title: "Order placed!", message: "Your order has been registered, you can view it in [Your orders] ", actions: [UIAlertAction(title: "Closed", style: .default, handler: { (action) in
+                    self.order = nil
+                    self.successful = nil
                     for viewController in (self.navigationController?.viewControllers ?? []) {
+                        
                         if viewController is AccountInterfaceViewController {
                             self.navigationController?.popToViewController(viewController, animated: true)
                         }
@@ -27,14 +30,16 @@ class BasketViewController: BaseViewController<BasketView> {
                 } ) ] )
             } else {
                 showAlert(title: "Error!", message: "There is an error, please check your internet connection and try again later.", actions: [UIAlertAction(title: "Closed", style: .default, handler: { (action) in
+                    self.order = nil
+                    self.successful = nil
                     for viewController in (self.navigationController?.viewControllers ?? []) {
+                        
                         if viewController is AccountInterfaceViewController {
                             self.navigationController?.popToViewController(viewController, animated: true)
                         }
                     }
                 } ) ] )
             }
-            
         }
     }
     
@@ -43,17 +48,23 @@ class BasketViewController: BaseViewController<BasketView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let orderAmount = String(Basket.shared.basketValue)
-        contentView.orderAmountLabel.text = orderAmount + Labels.Text.pln
-        contentView.leadTimeLabel.text = Basket.shared.leadTime
-        contentView.deliveryAddressLabel.text = Basket.shared.deliveryAddress
-        contentView.orderTableView.reloadData()
+        reloadLocalData()
     }
     
     //MARK: - Setup
     
-    override func setupView() {
+    func reloadLocalData() {
+        let orderAmountFloat = Float(Basket.shared.basketValue)
+        let orderAmount = String(orderAmountFloat)
         
+        contentView.deliveryAddressLabel.text = Basket.shared.deliveryAddress
+        contentView.orderNumberLabel.text = Basket.shared.orderNumber
+        contentView.orderAmountLabel.text = orderAmount + Labels.Text.pln
+        contentView.leadTimeLabel.text = Basket.shared.leadTime
+        contentView.orderTableView.reloadData()
+    }
+    
+    override func setupView() {
         contentView.orderTableView.dataSource = self
         contentView.orderTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifire.tableView)
         
@@ -64,9 +75,18 @@ class BasketViewController: BaseViewController<BasketView> {
             Basket.shared.completeOrder() { [unowned self] newOrder in
                 self.order = newOrder
             }
-            
             guard let order = order else {return}
-            FirebaseClient.shared.addOrder(userUID: UserSession.shared.UserInfo(about: User.id), with: order) { [weak self] success in
+
+            let userID: String = UserSession.shared.UserInfo(about: User.id)
+            var userName: String = "" {
+                didSet {
+                    FirebaseClient.shared.addInvoiceFolders(userName: userName, userID: userID, orderNumber: order.orderNumber)
+                }
+            }
+            FirebaseClient.shared.getAccountInfo(userUID: userID) { userInfo in
+                userName = userInfo.companyName
+            }
+            FirebaseClient.shared.addOrder(userUID: userID, with: order) { [weak self] success in
                 self?.successful = success
             }
         }
@@ -74,6 +94,7 @@ class BasketViewController: BaseViewController<BasketView> {
     }
 }
 
+//MARK: - Extension
 
 extension BasketViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,25 +105,31 @@ extension BasketViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifire.tableView, for: indexPath)
         let basketProduct = Basket.shared.productsList[indexPath.row]
         let product = basketProduct.product
-        let totalPtice = String(basketProduct.totalPrice)
+        let totalPticeFloat = Float(basketProduct.totalPrice)
+        let totalPtice = String(totalPticeFloat)
         
-        let name = "Box - \(product.name) / "
-        let amount = "amount: \(basketProduct.amount) / "
+        
+        let name = Labels.Text.box + product.name
+        let amountString = String(basketProduct.amount)
+        let amount = Labels.Text.amount + amountString
         let price = Labels.Text.price + totalPtice + Labels.Text.pln
         cell.textLabel?.font = .systemFont(ofSize: 11)
-        cell.textLabel?.text = name + amount + price
+        cell.textLabel?.text = name + Labels.Text.slash + amount + Labels.Text.slash + price
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
-}
-
-extension BasketViewController {
-    
-    enum Identifire {
-        static let tableView: String = "UITableViewCell"
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let basketProduct = Basket.shared.productsList[indexPath.row]
+            Basket.shared.removeFromBasket(product: basketProduct)
+            reloadLocalData()
+        }
     }
 }

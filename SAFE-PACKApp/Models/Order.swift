@@ -10,10 +10,11 @@ import Foundation
 struct Order: Decodable, Encodable {
     
     let productsList: [BasketProduct]
-    let orderNumber: Int
+    let orderNumber: String
     let orderPrice: Double
     let status: String
     let dateOfTheOrder: String
     let deliveryAddress: String
     let leadTime: String
+    let documentName: String
 }

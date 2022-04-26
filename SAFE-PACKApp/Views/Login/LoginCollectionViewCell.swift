@@ -7,16 +7,17 @@
 
 import UIKit
 
-protocol LoginData {
-    func loginData(email: String, password: String, repeatPassword: String)
-}
-
 class LoginCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
     static let identifier = "LoginCollectionViewCell "
     var delegateLoginData: LoginData?
+    var delegateForgetPassword: ForgetPassword?
+//    var delegateVisiblePassword: VisiblePassword?
+//    var delegateVisiblePasswordTwo: VisiblePasswordTwo?
+    var passwordIsHidden: Bool = true
+    var repeatPasswordIsHidden: Bool = true
     
     //MARK: - Subview
     
@@ -39,7 +40,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
         textField.layer.shadowRadius = 5
         textField.layer.shadowOffset = CGSize.zero
         textField.layer.shadowColor = UIColor.systemGray5.cgColor
-        
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
@@ -49,11 +50,20 @@ class LoginCollectionViewCell: UICollectionViewCell {
         textField.placeholder = TextFields.Text.passwordField
         textField.layer.cornerRadius = 10
         textField.backgroundColor = .white
+        textField.isSecureTextEntry = true
         textField.layer.shadowOpacity = 1
         textField.layer.shadowRadius = 5
         textField.layer.shadowOffset = CGSize.zero
         textField.layer.shadowColor = UIColor.systemGray5.cgColor
         return textField
+    }()
+    
+    let visibilityPasswordButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(Image.eye, for: .normal)
+        button.tintColor = Color.fontShadow
+        return button
     }()
     
     let repeatPasswordTextField: UITextField = {
@@ -62,6 +72,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
         textField.placeholder = TextFields.Text.repeatPasswordField
         textField.layer.cornerRadius = 10
         textField.backgroundColor = .white
+        textField.isSecureTextEntry = true
         textField.isHidden = true
         textField.layer.shadowOpacity = 1
         textField.layer.shadowRadius = 5
@@ -70,13 +81,22 @@ class LoginCollectionViewCell: UICollectionViewCell {
         return textField
     }()
     
-    let forgetPasswordLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Labels.Text.forgerPassword
-        label.textColor = Color.fontShadow
-        label.isHidden = false
-        return label
+    let visibilityPasswordTwoButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(Image.eye, for: .normal)
+        button.tintColor = Color.fontShadow
+        button.isHidden = true
+        return button
+    }()
+    
+    let forgetPasswordLabel: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(Color.fontShadow, for: .normal)
+        button.setTitle(Labels.Text.forgerPassword, for: .normal)
+        button.isHidden = false
+        return button
     }()
     
     let loginButton: UIButton = {
@@ -101,13 +121,12 @@ class LoginCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-   
+    
     
     //MARK: - Initializator
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupSubviews()
         setupConstraints()
         setupBindings()
@@ -120,14 +139,16 @@ class LoginCollectionViewCell: UICollectionViewCell {
     //MARK: - Setup
     
     private func setupSubviews() {
-        
-        addSubview(headLabel)
-        addSubview(emailTextField)
-        addSubview(passwordTextField)
-        addSubview(forgetPasswordLabel)
-        addSubview(repeatPasswordTextField)
-        addSubview(loginButton)
-        addSubview(termsPrivatyLabel)
+        [headLabel,
+         emailTextField,
+         passwordTextField,
+         forgetPasswordLabel,
+         visibilityPasswordButton,
+         repeatPasswordTextField,
+         visibilityPasswordTwoButton,
+         loginButton,
+         termsPrivatyLabel]
+            .forEach(addSubview)
     }
     
     private func setupConstraints() {
@@ -147,17 +168,26 @@ class LoginCollectionViewCell: UICollectionViewCell {
             passwordTextField.heightAnchor.constraint(equalToConstant: Buttons.Size.height),
             passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
             
+            visibilityPasswordButton.topAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: 5),
+            visibilityPasswordButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: -10),
+            visibilityPasswordButton.leadingAnchor.constraint(greaterThanOrEqualTo: passwordTextField.leadingAnchor),
+            visibilityPasswordButton.bottomAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: -5),
+            
             repeatPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: TextFields.Size.betweenSpace),
             repeatPasswordTextField.widthAnchor.constraint(equalToConstant: TextFields.Size.width),
             repeatPasswordTextField.heightAnchor.constraint(equalToConstant: Buttons.Size.height),
             repeatPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            visibilityPasswordTwoButton.topAnchor.constraint(equalTo: repeatPasswordTextField.topAnchor, constant: 5),
+            visibilityPasswordTwoButton.trailingAnchor.constraint(equalTo: repeatPasswordTextField.trailingAnchor, constant: -10),
+            visibilityPasswordTwoButton.leadingAnchor.constraint(greaterThanOrEqualTo: repeatPasswordTextField.leadingAnchor),
+            visibilityPasswordTwoButton.bottomAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: -5),
             
             forgetPasswordLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: TextFields.Size.betweenSpace),
             forgetPasswordLabel.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
             
             loginButton.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: Labels.Size.topSpace),
             loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            //            loginButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             loginButton.widthAnchor.constraint(equalToConstant: Buttons.Size.width),
             loginButton.heightAnchor.constraint(equalToConstant: Buttons.Size.height),
             
@@ -165,9 +195,10 @@ class LoginCollectionViewCell: UICollectionViewCell {
             termsPrivatyLabel.widthAnchor.constraint(equalTo: loginButton.widthAnchor, constant: TextFields.Size.betweenSpace),
             termsPrivatyLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             termsPrivatyLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor)
-            
         ])
     }
+    
+    //MARK: - Methods
     
     func setupBindings() {
         let tapButton = UIAction{ [unowned self] _ in
@@ -178,12 +209,59 @@ class LoginCollectionViewCell: UICollectionViewCell {
             )
         }
         loginButton.addAction(tapButton, for: .touchUpInside)
-    
+        
+        let tapForgetPassword = UIAction{ [unowned self] _ in
+//            self.forgetPasswordLabel.setTitleColor(Color.darkGreen, for: .normal)
+            delegateForgetPassword?.forgetPassword()
+        }
+        forgetPasswordLabel.addAction(tapForgetPassword, for: .touchUpInside)
+        
+        let tapVisiblePassword = UIAction{ [unowned self] _ in
+            self.passwordIsHidden.toggle()
+            self.passwordTextField.isSecureTextEntry.toggle()
+            if passwordIsHidden == true {
+                visibilityPasswordButton.tintColor = Color.fontShadow
+            } else {
+                visibilityPasswordButton.tintColor = Color.darkGreen
+            }
+        }
+        visibilityPasswordButton.addAction(tapVisiblePassword, for: .touchUpInside)
+        
+        let tapVisiblePasswordTwo = UIAction{ [unowned self] _ in
+            self.repeatPasswordIsHidden.toggle()
+            self.repeatPasswordTextField.isSecureTextEntry.toggle()
+            if repeatPasswordIsHidden == true {
+                visibilityPasswordTwoButton.tintColor = Color.fontShadow
+            } else {
+                visibilityPasswordTwoButton.tintColor = Color.darkGreen
+            }
+        }
+        visibilityPasswordTwoButton.addAction(tapVisiblePasswordTwo, for: .touchUpInside)
     }
 }
+
+    //MARK: - Extensions
 
 extension LoginCollectionViewCell {
     enum Constants {
         static let termsPrivatyLabelTop: CGFloat = 12
     }
 }
+
+    //MARK: - Protocols
+
+protocol LoginData {
+    func loginData(email: String, password: String, repeatPassword: String)
+}
+
+protocol ForgetPassword {
+    func forgetPassword()
+}
+
+//protocol VisiblePassword {
+//    func visiblePassword()
+//}
+//
+//protocol VisiblePasswordTwo {
+//    func visiblePasswordTwo()
+//}

@@ -61,19 +61,19 @@ final class AccountInterfaceView: BaseView {
         return image
     }()
     
-    let unpaidInvoicesTitleLabel: UILabel = {
+    let ordersAwaitingPaymentTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Labels.Text.unpaidInvoices
+        label.text = Labels.Text.ordersAwaitingPayment
         label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
         label.textColor = Color.fontShadow
         return label
     }()
     
-    let unpaidInvoicesLabel: UILabel = {
+    let ordersAwaitingPaymentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font.withSize(Labels.Size.labelTitleFont)
+        label.font = .boldSystemFont(ofSize: Labels.Size.labelTitleFont)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -90,7 +90,7 @@ final class AccountInterfaceView: BaseView {
     let ordersInProgressLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font.withSize(Labels.Size.labelTitleFont)
+        label.font = .boldSystemFont(ofSize: Labels.Size.labelTitleFont)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -112,19 +112,6 @@ final class AccountInterfaceView: BaseView {
         button.layer.borderColor = Color.darkGreen.cgColor
         button.backgroundColor = .white
         button.setTitle(Buttons.Title.addAnOrder, for: .normal)
-        button.setTitleColor(Color.font, for: .normal)
-//        button.titleLabel?.font = .boldSystemFont(ofSize: <#T##CGFloat#>)
-        return button
-    }()
-    
-    let yourInvoicesButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = Color.darkGreen.cgColor
-        button.backgroundColor = .white
-        button.setTitle(Buttons.Title.yourInvoices, for: .normal)
         button.setTitleColor(Color.font, for: .normal)
         return button
     }()
@@ -152,11 +139,20 @@ final class AccountInterfaceView: BaseView {
         button.setTitleColor(Color.red, for: .normal)
         return button
     }()
+    
     let infoButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = UIImage(systemName: "info.circle")
         button.tintColor = .white
         return button
+    }()
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        activityIndicator.color = Color.font
+        return activityIndicator
     }()
     
     //MARK: - Setup
@@ -166,24 +162,24 @@ final class AccountInterfaceView: BaseView {
     }
     
     override func setupSubviews() {
-        
         [background,
          nameTitleLabel,
          nameLabel,
          emailTitleLabel,
          emailLabel,
          lineImage,
-         unpaidInvoicesTitleLabel,
-         unpaidInvoicesLabel,
+         ordersAwaitingPaymentTitleLabel,
+         ordersAwaitingPaymentLabel,
          ordersInProgressTitleLabel,
          ordersInProgressLabel,
          lineSecondImage,
          addAnOrderButton,
-         yourInvoicesButton,
          yourOrdersButton,
-         logOutButton]
+         logOutButton,
+         activityIndicatorView]
             .forEach(addSubview)
     }
+    
     override func setupConstraints() {
         NSLayoutConstraint.activate([
             
@@ -204,16 +200,16 @@ final class AccountInterfaceView: BaseView {
             lineImage.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 20),
             lineImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            unpaidInvoicesTitleLabel.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 20),
-            unpaidInvoicesTitleLabel.leadingAnchor.constraint(equalTo: nameTitleLabel.leadingAnchor),
+            ordersAwaitingPaymentTitleLabel.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 20),
+            ordersAwaitingPaymentTitleLabel.leadingAnchor.constraint(equalTo: nameTitleLabel.leadingAnchor),
             
-            unpaidInvoicesLabel.topAnchor.constraint(equalTo: unpaidInvoicesTitleLabel.topAnchor),
-            unpaidInvoicesLabel.leadingAnchor.constraint(equalTo: unpaidInvoicesTitleLabel.trailingAnchor, constant: 5),
-            unpaidInvoicesLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-            unpaidInvoicesLabel.bottomAnchor.constraint(equalTo: unpaidInvoicesTitleLabel.bottomAnchor),
+            ordersAwaitingPaymentLabel.topAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.topAnchor),
+            ordersAwaitingPaymentLabel.leadingAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.trailingAnchor, constant: 5),
+            ordersAwaitingPaymentLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            ordersAwaitingPaymentLabel.bottomAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.bottomAnchor),
             
-            ordersInProgressTitleLabel.topAnchor.constraint(equalTo: unpaidInvoicesTitleLabel.bottomAnchor, constant: 10),
-            ordersInProgressTitleLabel.leadingAnchor.constraint(equalTo: unpaidInvoicesTitleLabel.leadingAnchor),
+            ordersInProgressTitleLabel.topAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.bottomAnchor, constant: 10),
+            ordersInProgressTitleLabel.leadingAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.leadingAnchor),
             
             ordersInProgressLabel.topAnchor.constraint(equalTo: ordersInProgressTitleLabel.topAnchor),
             ordersInProgressLabel.leadingAnchor.constraint(equalTo: ordersInProgressTitleLabel.trailingAnchor, constant: 5),
@@ -229,27 +225,20 @@ final class AccountInterfaceView: BaseView {
             addAnOrderButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
             addAnOrderButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
             
-            yourInvoicesButton.topAnchor.constraint(equalTo: addAnOrderButton.bottomAnchor, constant: 10),
-            yourInvoicesButton.leadingAnchor.constraint(equalTo: addAnOrderButton.leadingAnchor),
-            yourInvoicesButton.trailingAnchor.constraint(equalTo: addAnOrderButton.trailingAnchor),
-            yourInvoicesButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
-            yourInvoicesButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
-            yourInvoicesButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
-            
             yourOrdersButton.topAnchor.constraint(equalTo: addAnOrderButton.topAnchor),
             yourOrdersButton.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 5),
             yourOrdersButton.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             yourOrdersButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
             yourOrdersButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
             
-            logOutButton.topAnchor.constraint(equalTo: yourInvoicesButton.topAnchor),
-            logOutButton.leadingAnchor.constraint(equalTo: yourOrdersButton.leadingAnchor),
-            logOutButton.trailingAnchor.constraint(equalTo: yourOrdersButton.trailingAnchor),
+            logOutButton.topAnchor.constraint(equalTo: addAnOrderButton.bottomAnchor, constant: 10),
+            logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             logOutButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
             logOutButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
-            logOutButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor)
+            logOutButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
+            activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-        
     }
 }

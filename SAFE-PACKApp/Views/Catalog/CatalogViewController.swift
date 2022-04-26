@@ -37,64 +37,63 @@ final class CatalogViewController: BaseViewController<CatalogView> {
             }
         }
     }
-        
-        //MARK: - Lifecycle
-        
-        override func viewDidAppear(_ animated: Bool) {
-            self.navigationController?.isNavigationBarHidden = false
-            navigationItem.hidesBackButton = false
-            navigationController?.navigationBar.isUserInteractionEnabled = true
-            navigationController?.navigationBar.barStyle = UIBarStyle.black
-            navigationController?.navigationBar.tintColor = Color.white
-        }
-        
-        //MARK: - Setup
-        
-        override func setupView() {
-            
-            FirebaseClient.shared.getProducts() { [weak self] productArray in
-                self?.products = productArray
-            }
-            contentView.catalogCollectionView.dataSource = self
-            contentView.catalogCollectionView.delegate = self
-            contentView.catalogCollectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: CatalogCollectionViewCell.identifier)
-        }
-        
-        override func setupBindings() {
-        }
+    
+    //MARK: - Lifecycle
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+        navigationItem.hidesBackButton = false
+        navigationController?.navigationBar.isUserInteractionEnabled = true
+        navigationController?.navigationBar.barStyle = UIBarStyle.black
+        navigationController?.navigationBar.tintColor = Color.white
+        self.hideKeyboardWhenTappedAround()
     }
     
-    extension CatalogViewController: UICollectionViewDataSource {
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return products.count
+    //MARK: - Setup
+    
+    override func setupView() {
+        FirebaseClient.shared.getProducts() { [weak self] productArray in
+            self?.products = productArray
         }
-        
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogCollectionViewCell.identifier, for: indexPath) as! CatalogCollectionViewCell
-            let product = products[indexPath.item]
-            cell.productNameLabel.text = product.name
-            cell.sizeOfPackageLabelOne.text = "Length: \(product.length)"
-            cell.sizeOfPackageLabelTwo.text = "Width: \(product.width)"
-            cell.sizeOfPackageLabelThree.text = "Height: \(product.height)"
-            cell.sizesAdaptedLabelOne.text = "InPost - \(product.inPost)"
-            cell.sizesAdaptedLabelTwo.text = "DHL - \(product.DHL)"
-            cell.sizesAdaptedLabelThree.text = "Pocztex - \(product.pocztex)"
-            cell.productImageView.image = images[indexPath.item]
-            let labels: [UILabel] = [cell.recommendedLabelOne,
-                                     cell.recommendedLabelTwo,
-                                     cell.recommendedLabelThree,
-                                     cell.recommendedLabelFour,
-                                     cell.recommendedLabelFive,
-                                     cell.recommendedLabelSix]
-            for index in 0 ..< product.recommendation.count {
-                labels[index].text = product.recommendation[index]
-            }
-            return cell
-        }
+        contentView.catalogCollectionView.dataSource = self
+        contentView.catalogCollectionView.delegate = self
+        contentView.catalogCollectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: CatalogCollectionViewCell.identifier)
+    }
+}
+
+    //MARK: - Extensions
+
+extension CatalogViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return products.count
     }
     
-    extension CatalogViewController: UICollectionViewDelegateFlowLayout {
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: contentView.catalogCollectionView.frame.width, height: contentView.catalogCollectionView.frame.height)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogCollectionViewCell.identifier, for: indexPath) as! CatalogCollectionViewCell
+        let product = products[indexPath.item]
+        cell.productNameLabel.text = product.name
+        cell.sizeOfPackageLabelOne.text = "Length: \(product.length)"
+        cell.sizeOfPackageLabelTwo.text = "Width: \(product.width)"
+        cell.sizeOfPackageLabelThree.text = "Height: \(product.height)"
+        cell.sizesAdaptedLabelOne.text = "InPost - \(product.inPost)"
+        cell.sizesAdaptedLabelTwo.text = "DHL - \(product.DHL)"
+        cell.sizesAdaptedLabelThree.text = "Pocztex - \(product.pocztex)"
+        cell.productImageView.image = images[indexPath.item]
+        let labels: [UILabel] = [cell.recommendedLabelOne,
+                                 cell.recommendedLabelTwo,
+                                 cell.recommendedLabelThree,
+                                 cell.recommendedLabelFour,
+                                 cell.recommendedLabelFive,
+                                 cell.recommendedLabelSix]
+        for index in 0 ..< product.recommendation.count {
+            labels[index].text = product.recommendation[index]
         }
+        return cell
     }
+}
+
+extension CatalogViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: contentView.catalogCollectionView.frame.width, height: contentView.catalogCollectionView.frame.height)
+    }
+}

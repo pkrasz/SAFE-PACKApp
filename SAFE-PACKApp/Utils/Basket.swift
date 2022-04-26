@@ -27,32 +27,40 @@ class Basket {
         }
     }
     var basketValue: Double = 0
-    let orderNumber: Int = 12345
+    var orderNumber: String = ""
     var leadTime: String = LeadTime.fourWeeks
     var deliveryAddress: String = ""
-    let dateOfOrder: String = "21.04.2020"
+    var dateOfOrder: String = ""
     
     static let shared = Basket()
     
     //MARK: - Initializator
     
     private init() {
+        reloadBasket()
+    }
+
+    //MARK: - Methods
+    
+    func reloadBasket() {
         
         let currentDataTime = Date()
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
+        formatter.timeStyle = .none
         formatter.dateStyle = .short
+        var dataTimeString = formatter.string(from: currentDataTime)
+        dateOfOrder = dataTimeString
+        formatter.dateFormat = "HHmmss"
+        dataTimeString = formatter.string(from: currentDataTime)
         
-        let dataTimeString = formatter.string(from: currentDataTime)
-        
-        print("DATA: \(dataTimeString)")
-        
+        FirebaseClient.shared.getAccountInfo(userUID: UserSession.shared.UserInfo(about: User.id)) { [weak self] user in
+            let NIP = String(user.NIP)
+            self?.orderNumber = NIP.prefix(3) + dataTimeString
+        }
         FirebaseClient.shared.getAccountInfo(userUID: UserSession.shared.UserInfo(about: User.id)) { [weak self] userInfo in
             self?.deliveryAddress = userInfo.address
         }
     }
-    
-    //MARK: - Methods
     
     func addToBasket(_ amount: Int, of product: Product) {
         
@@ -87,11 +95,13 @@ class Basket {
     
     func completeOrder(completion: @escaping (Order) -> Void) {
         
-        let order = Order(productsList: productsList, orderNumber: orderNumber, orderPrice: basketValue, status: Status.waiting, dateOfTheOrder: dateOfOrder, deliveryAddress: deliveryAddress, leadTime: leadTime)
+        let order = Order(productsList: productsList, orderNumber: orderNumber, orderPrice: basketValue, status: Status.awaitingAccepted, dateOfTheOrder: dateOfOrder, deliveryAddress: deliveryAddress, leadTime: leadTime, documentName: "-")
         completion(order)
         
         productsList.removeAll()
         basketValue = 0
+        reloadBasket()
+        
     }
 }
 

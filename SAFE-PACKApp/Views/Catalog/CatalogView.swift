@@ -42,9 +42,6 @@ final class CatalogView: BaseView {
     
     //MARK: - Setup
     
-    override func setupView() {
-    }
-    
     override func setupSubviews() {
        [backgroundImageView,
         catalogCollectionView,

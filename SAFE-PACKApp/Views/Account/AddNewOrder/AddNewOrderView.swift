@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddNewOrderView: BaseView {
+final class AddNewOrderView: BaseView {
 
     //MARK: - SubView
     
@@ -48,9 +48,6 @@ class AddNewOrderView: BaseView {
     }()
     
     //MARK: - Setup
-    
-    override func setupView() {
-    }
     
     override func setupSubviews() {
         [backgroundImageView,

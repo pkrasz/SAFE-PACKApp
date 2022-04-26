@@ -7,13 +7,9 @@
 
 import UIKit
 
-enum AuthorizationType: Int {
-    case login = 0
-    case register = 1
-}
+
 
 final class LoginViewController: BaseViewController<LoginView> {
-    
     
     //MARK: - Properties
     
@@ -33,26 +29,24 @@ final class LoginViewController: BaseViewController<LoginView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         contentView.pageViews.reloadData()
+        self.hideKeyboardWhenTappedAround()
     }
     
     //MARK: - Setup
     
     override func setupView() {
-        
         self.navigationController?.isNavigationBarHidden = false
         navigationItem.hidesBackButton = false
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.barStyle = UIBarStyle.black
         navigationController?.navigationBar.tintColor = Color.white
         
-//        contentView.activityIndicatorView.isHidden = true
         contentView.pageViews.dataSource = self
         contentView.pageViews.delegate = self
         contentView.pageViews.register(LoginCollectionViewCell.self, forCellWithReuseIdentifier: LoginCollectionViewCell.identifier)
     }
     
     override func setupBindings() {
-        
         let signInButtonTapped = UIAction{ [unowned self] _ in
             self.contentView.pageViews.scrollToItem(at: .init(item: 0, section: 0), at: .left, animated: true)
             autorizationType = .login
@@ -64,9 +58,10 @@ final class LoginViewController: BaseViewController<LoginView> {
             autorizationType = .register
         }
         contentView.headerGetStartedButton.addAction(getStartedButtonTapped, for: .touchUpInside)
-        
     }
 }
+
+    //MARK: - Extensions
 
 extension LoginViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -77,6 +72,7 @@ extension LoginViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginCollectionViewCell.identifier, for: indexPath) as! LoginCollectionViewCell
         let autorizationType = AuthorizationType(rawValue: indexPath.item)
         cell.delegateLoginData = self
+        cell.delegateForgetPassword = self
         cell.emailTextField.text = nil
         cell.passwordTextField.text = nil
         cell.repeatPasswordTextField.text = nil
@@ -86,6 +82,7 @@ extension LoginViewController: UICollectionViewDataSource {
             cell.forgetPasswordLabel.isHidden = true
             cell.repeatPasswordTextField.isHidden = false
             cell.termsPrivatyLabel.isHidden = false
+            cell.visibilityPasswordTwoButton.isHidden = false
         }
         return cell
     }
@@ -135,4 +132,17 @@ extension LoginViewController: LoginData {
     }
 }
 
+extension LoginViewController: ForgetPassword {
+    func forgetPassword() {
+        let resetPasswordViewController = ResetPasswordViewController()
+        navigationController?.pushViewController(resetPasswordViewController, animated: true)
+    }
+}
+
+extension LoginViewController {
+    enum AuthorizationType: Int {
+        case login = 0
+        case register = 1
+    }
+}
 

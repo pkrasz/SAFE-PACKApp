@@ -24,6 +24,12 @@ final class AccountInfoViewController: BaseViewController<AccountView> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        self.hideKeyboardWhenTappedAround()
+    }
+    
     //MARK: - Setup
     
     override func setupView() {
@@ -41,7 +47,6 @@ final class AccountInfoViewController: BaseViewController<AccountView> {
     }
     
     override func setupBindings() {
-        
         let tapApproveButton = UIAction { [unowned self] _ in
             
             let name = contentView.nameTextField.text

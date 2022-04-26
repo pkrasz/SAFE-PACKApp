@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
+final class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
     
     //MARK: - Properties
     
@@ -19,9 +19,7 @@ class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
                         guard let image = image else {return}
                         self?.images.append(image)
                     }
-                    
                 }
-                
             }
         }
     }
@@ -42,8 +40,8 @@ class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         contentView.productsCollectionView.reloadData()
+        self.hideKeyboardWhenTappedAround()
     }
     
     //MARK: - Setup
@@ -60,9 +58,7 @@ class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
         navigationItem.rightBarButtonItem = contentView.goToBasketButton
     }
     
-    
     override func setupBindings() {
-        
         contentView.goToBasketButton.target = self
         contentView.goToBasketButton.action = #selector(tapGoToBasketButton)
     }
@@ -96,20 +92,17 @@ extension AddNewOrderViewController: UICollectionViewDataSource {
         cell.priceLabel.text = price + Labels.Text.pln
         return cell
     }
-    
-    
 }
 
 extension AddNewOrderViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 160, height: 140)
     }
-    
 }
 
 extension AddNewOrderViewController: AddToBasketButton {
     func addToBasketButton(amount: Int, an product: Product) {
         Basket.shared.addToBasket(amount, of: product)
-        
+        contentView.productsCollectionView.reloadData()
     }
 }

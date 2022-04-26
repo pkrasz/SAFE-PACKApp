@@ -90,7 +90,8 @@ final class LoginView: BaseView {
          headerGetStartedButton,
          leftActivityBar,
          rightActivityBar,
-        activityIndicatorView].forEach(addSubview)
+        activityIndicatorView]
+            .forEach(addSubview)
         
     }
     

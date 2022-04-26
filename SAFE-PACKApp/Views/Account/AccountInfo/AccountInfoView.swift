@@ -71,6 +71,7 @@ final class AccountView: BaseView {
         textField.backgroundColor = .white
         textField.font = .systemFont(ofSize: Labels.Size.labelFont)
         textField.textColor = Color.font
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -120,7 +121,6 @@ final class AccountView: BaseView {
     }
     
     override func setupSubviews() {
-        
         [background,
          nameTitleLabel,
          nameTextField,
@@ -181,7 +181,6 @@ final class AccountView: BaseView {
             approveButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
             approveButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
             approveButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor)
-            
         ])
     }
 }

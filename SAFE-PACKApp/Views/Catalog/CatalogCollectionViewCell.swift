@@ -174,8 +174,6 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setupView()
         setupSubviews()
         setupConstraints()
     }
@@ -184,16 +182,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    //MARK: - Lifecycle
-//
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//    }
-//
     //MARK: - Setup
-    
-    private func setupView() {
-    }
     
     private func setupSubviews() {
         [productNameTitleLabel,
@@ -286,7 +275,6 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
             sizeAdaptedFrame.leadingAnchor.constraint(equalTo: sizesAdaptedTitleLabel.leadingAnchor, constant: -10),
             sizeAdaptedFrame.trailingAnchor.constraint(equalTo: sizesAdaptedTitleLabel.trailingAnchor, constant: 10),
             sizeAdaptedFrame.bottomAnchor.constraint(equalTo: sizesAdaptedLabelThree.bottomAnchor, constant: 10)
-            
         ])
     }
 }

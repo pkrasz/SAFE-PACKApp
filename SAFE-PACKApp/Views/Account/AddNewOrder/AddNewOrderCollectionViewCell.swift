@@ -7,11 +7,7 @@
 
 import UIKit
 
-protocol AddToBasketButton {
-    func addToBasketButton(amount: Int, an product: Product)
-}
-
-class AddNewOrderCollectionViewCell: UICollectionViewCell {
+final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
@@ -109,6 +105,7 @@ class AddNewOrderCollectionViewCell: UICollectionViewCell {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 1
         textField.layer.borderColor = Color.fontShadow.cgColor
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -127,7 +124,6 @@ class AddNewOrderCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
         setupSubviews()
         setupConstraints()
@@ -142,21 +138,19 @@ class AddNewOrderCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         amountTextField.text = nil
     }
     
     //MARK: - Setup
     
-    func setupView() {
+    private func setupView() {
         backgroundColor = Color.white
         layer.borderColor = Color.darkGreen.cgColor
         layer.borderWidth = 2
         layer.cornerRadius = 15
     }
     
-    func setupSubviews() {
-        
+    private func setupSubviews() {
         [productNameTitleLabel,
          productNameLabel,
          sizeLabel,
@@ -172,7 +166,7 @@ class AddNewOrderCollectionViewCell: UICollectionViewCell {
             .forEach(addSubview)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             
             productNameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 7),
@@ -227,11 +221,10 @@ class AddNewOrderCollectionViewCell: UICollectionViewCell {
             addToBasketButton.heightAnchor.constraint(equalToConstant: 31),
             addToBasketButton.widthAnchor.constraint(equalToConstant: 31),
             addToBasketButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
-            
-            
         ])
     }
-    func setupBindings() {
+    
+    private func setupBindings() {
         let tapAddToBasketButton = UIAction { [unowned self] _ in
             let amount = Int(amountTextField.text ?? "")
             guard let product = product else {return}
@@ -243,5 +236,10 @@ class AddNewOrderCollectionViewCell: UICollectionViewCell {
         }
         addToBasketButton.addAction(tapAddToBasketButton, for: .touchUpInside)
     }
-    
+}
+
+//MARK: - Protocols
+
+protocol AddToBasketButton {
+    func addToBasketButton(amount: Int, an product: Product)
 }

@@ -42,9 +42,20 @@ final class UserSession {
             let email = auth?.currentUser?.email
             guard let email = email else {return ""}
             return email
-
+            
         }
     }
+    func userResetPassword(email: String, completion: @escaping (String, Bool) -> Void) {
+        auth?.sendPasswordReset(withEmail: email) { error in
+            if error != nil {
+                guard let error = error else {return}
+                completion(error.localizedDescription, false)
+            } else {
+                completion("", true)
+            }
+        }
+    }
+    
     func logIn(email: String, password: String, completion: @escaping (String, Bool) -> Void) {
         auth?.signIn(withEmail: email, password: password) { result, error in
             if error != nil {
