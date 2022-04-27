@@ -69,7 +69,6 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     let productImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(systemName: "cube.box")
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -112,7 +111,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     let addToBasketButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.setImage(Image.plus, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 2
         button.layer.borderColor = Color.lightGreen.cgColor
@@ -226,7 +225,9 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     
     private func setupBindings() {
         let tapAddToBasketButton = UIAction { [unowned self] _ in
-            let amount = Int(amountTextField.text ?? "")
+            let amountString = amountTextField.text
+            guard let amountString = amountString else {return}
+            let amount = Int(amountString)
             guard let product = product else {return}
             guard let amount = amount else {return}
             delegateaddToBasketButton?.addToBasketButton(

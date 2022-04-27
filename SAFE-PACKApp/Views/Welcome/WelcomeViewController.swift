@@ -23,10 +23,6 @@ final class WelcomeViewController: BaseViewController<WelcomeView> {
     //MARK: - Setup
     
     override func setupView() {
-        navigationController?.isNavigationBarHidden = true
-        navigationItem.hidesBackButton = true
-        navigationController?.navigationBar.isUserInteractionEnabled = false
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.contentView.logoAnimation()
         }

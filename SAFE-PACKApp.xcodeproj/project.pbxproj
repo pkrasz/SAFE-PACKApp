@@ -58,7 +58,6 @@
 		A8F4E7CE2817382900681B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7CD2817382900681B48 /* ResetPasswordViewController.swift */; };
 		A8F4E7D02817383B00681B48 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7CF2817383B00681B48 /* ResetPasswordView.swift */; };
 		A8F4E7D228180FB300681B48 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7D128180FB300681B48 /* MailSender.swift */; };
-		A8F4E7D428184C7200681B48 /* PasswordUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7D328184C7200681B48 /* PasswordUITextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,7 +107,6 @@
 		A8F4E7CD2817382900681B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A8F4E7CF2817383B00681B48 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		A8F4E7D128180FB300681B48 /* MailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
-		A8F4E7D328184C7200681B48 /* PasswordUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordUITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +220,6 @@
 				A85FB92F27FDE993001E8BF9 /* LoginViewController.swift */,
 				A85FB93127FDE9A6001E8BF9 /* LoginView.swift */,
 				A85FB95927FEFF2E001E8BF9 /* LoginCollectionViewCell.swift */,
-				A8F4E7D328184C7200681B48 /* PasswordUITextField.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -456,7 +453,6 @@
 				A85FB93227FDE9A6001E8BF9 /* LoginView.swift in Sources */,
 				A8E33FBE280EFEE400230C2E /* SingleOrderView.swift in Sources */,
 				A85FB93627FDE9C6001E8BF9 /* AccountInfoViewController.swift in Sources */,
-				A8F4E7D428184C7200681B48 /* PasswordUITextField.swift in Sources */,
 				A8F4E7C52812CA1700681B48 /* OrdersTableViewCell.swift in Sources */,
 				A85FB91D27FC48B4001E8BF9 /* WelcomeView.swift in Sources */,
 				A85FB9632804A33A001E8BF9 /* AccountInterfaceView.swift in Sources */,

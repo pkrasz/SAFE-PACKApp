@@ -26,7 +26,11 @@ enum Image {
     static let accountBackgroundTwo: UIImage = UIImage(named: "accountBackgroundTwo")!
     static let availability: UIImage = UIImage(systemName: "circle.inset.filled")!
     static let backgroundFour: UIImage = UIImage(named: "backgroundFour")!
-    static let eye: UIImage = UIImage(systemName: "eye.fill")!
+    static let eyeFill: UIImage = UIImage(systemName: "eye.fill")!
+    static let eye: UIImage = UIImage(systemName: "eye")!
+    static let cart: UIImage = UIImage(systemName: "cart")!
+    static let plus: UIImage: UIImage(systemName: "plus")!
+
 }
 
 enum Buttons {
@@ -76,6 +80,9 @@ enum TextFields {
         static let emailField: String = "  E-mail..."
         static let passwordField: String = "  Password..."
         static let repeatPasswordField: String = "  Repeat password"
+        static let l: String = "L: "
+        static let w: String = "W: "
+        static let h: String = "H: "
     }
     
     enum Size {
@@ -150,12 +157,50 @@ enum Identifire {
     static let tableView: String = "UITableViewCell"
 }
 
-//enum Document {
-//    static let awaiting: Int = 0
-//    static let proforma: Int = 1
-//    static let invoice: Int = 2
-//}
+enum Alert {
+    
+    enum Title {
+        static let error: String = "Error!"
+        static let repeatPassword: String = "Repeat password!"
+        static let correct: String = "Correct!"
+        static let completeTheRegostration: String = "Complete the registration"
+        static let change: String = "You made a change in:"
+        static let noChange: String = "No changes were made"
+        static let registrationNotCompleted: String = "Registration not completed"
+        static let registrationComplete: String = "Registration completed!"
+        static let orderPlaced: String = "Order placed!"
+    }
+    
+    enum Messege {
+        static let passwordNotMatch: String = "Password does not match"
+        static let correctPasswordReset: String = "Please check your e-mail, we sent you a password reset messege"
+        static let fillTheData: String = "Fill in the necessary data to go to the account"
+        static let noChange: String = "You have not made any changes"
+        static let registrationNotCompleted: String = "You need to fill in all the information"
+        static let orderPlaced: String = "Your order has been registered, you can view it in [Your orders] "
+        static let orderError: String = "There is an error, please check your internet connection and try again later."
+    }
+    
+    enum Action {
+        static let close: UIAlertAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        static let `continue`: UIAlertAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
+    }
 
-//enum Text {
-//    static let size: CGFloat = 24
-//}
+    enum ActionTitle {
+        static let back: String = "Back"
+        static let close: String = "Close"
+        static let goToAccount: String = "Go to Account"
+    }
+}
+
+enum Empty {
+    static let string: String = ""
+}
+
+enum CollectionViewCell {
+    static let width: CGFloat = 160
+    static let length: CGFloat = 140
+    static let miminumLineSpacing: CGFloat = 20
+    static let sectionInset: CGFloat = 17
+}
+

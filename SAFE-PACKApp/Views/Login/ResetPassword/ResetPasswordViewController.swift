@@ -9,12 +9,6 @@ import UIKit
 
 final class ResetPasswordViewController: BaseViewController<ResetPasswordView> {
     
-    //MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        self.hideKeyboardWhenTappedAround()
-    }
-    
     //MARK: - Setup
     
     override func setupBindings() {
@@ -25,9 +19,9 @@ final class ResetPasswordViewController: BaseViewController<ResetPasswordView> {
                 didSet {
                     if success == false {
                         guard let error = error else {return}
-                        showAlert(title: "Error!", message: error, actions: [UIAlertAction(title: "Close", style: .default, handler: nil)])
+                        showAlert(title: Alert.Title.error, message: error, actions: [Alert.Action.close])
                     } else {
-                        showAlert(title: "Correct!", message: "Please check your e-mail, we sent you a password reset messege", actions: [UIAlertAction(title: "Close", style: .default, handler: { (action) in
+                        showAlert(title: Alert.Title.correct, message: Alert.Messege.correctPasswordReset, actions: [UIAlertAction(title: Alert.ActionTitle.close, style: .default, handler: { (action) in
                             self.navigationController?.popToRootViewController(animated: true)
                         })])
                     }

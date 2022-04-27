@@ -18,7 +18,7 @@ final class BasketViewController: BaseViewController<BasketView> {
             guard let successful = successful else {return}
             
             if successful == true {
-                showAlert(title: "Order placed!", message: "Your order has been registered, you can view it in [Your orders] ", actions: [UIAlertAction(title: "Closed", style: .default, handler: { (action) in
+                showAlert(title: Alert.Title.orderPlaced, message: Alert.Messege.orderPlaced, actions: [UIAlertAction(title: Alert.ActionTitle.close, style: .default, handler: { (action) in
                     self.order = nil
                     self.successful = nil
                     for viewController in (self.navigationController?.viewControllers ?? []) {
@@ -29,7 +29,7 @@ final class BasketViewController: BaseViewController<BasketView> {
                     }
                 } ) ] )
             } else {
-                showAlert(title: "Error!", message: "There is an error, please check your internet connection and try again later.", actions: [UIAlertAction(title: "Closed", style: .default, handler: { (action) in
+                showAlert(title: Alert.Title.error, message: Alert.Messege.orderError, actions: [UIAlertAction(title: Alert.ActionTitle.close, style: .default, handler: { (action) in
                     self.order = nil
                     self.successful = nil
                     for viewController in (self.navigationController?.viewControllers ?? []) {
@@ -78,7 +78,7 @@ final class BasketViewController: BaseViewController<BasketView> {
             guard let order = order else {return}
 
             let userID: String = UserSession.shared.UserInfo(about: User.id)
-            var userName: String = "" {
+            var userName: String = Empty.string {
                 didSet {
                     FirebaseClient.shared.addInvoiceFolders(userName: userName, userID: userID, orderNumber: order.orderNumber)
                 }

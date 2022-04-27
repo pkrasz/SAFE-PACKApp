@@ -95,7 +95,6 @@ final class WelcomeView: BaseView {
     // MARK: - Methods
     
     func logoAnimation() {
-        
         logoTopAnchor?.constant = LogoTopAnchor.welcome
         
         UIView.animate(withDuration: 0.5) {

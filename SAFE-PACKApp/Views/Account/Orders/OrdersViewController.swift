@@ -21,6 +21,8 @@ final class OrdersViewController: BaseViewController<OrdersView> {
     //MARK: - Setup
     
     override func setupView() {
+        navigationItem.setHidesBackButton(false, animated: true)
+
         FirebaseClient.shared.getOrders(userID: UserSession.shared.UserInfo(about: User.id)) { [weak self] orders in
             self?.allOrders = orders
         }

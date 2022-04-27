@@ -41,12 +41,14 @@ final class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         contentView.productsCollectionView.reloadData()
-        self.hideKeyboardWhenTappedAround()
+        
     }
     
     //MARK: - Setup
     
     override func setupView() {
+        navigationItem.setHidesBackButton(false, animated: true)
+
         FirebaseClient.shared.getProducts() { [unowned self] productArray in
             self.products = productArray
         }
@@ -84,9 +86,9 @@ extension AddNewOrderViewController: UICollectionViewDataSource {
         let product = products[indexPath.item]
         
         cell.productNameLabel.text = product.name
-        cell.lengthLabel.text = "L: \(product.length)"
-        cell.widthLabel.text = "W: \(product.width)"
-        cell.heightLabel.text = "H: \(product.height)"
+        cell.lengthLabel.text = TextFields.Text.l + product.length
+        cell.widthLabel.text = TextFields.Text.w + product.width
+        cell.heightLabel.text = TextFields.Text.h + product.height
         cell.productImageView.image = images[indexPath.item]
         let price: String = String(product.price)
         cell.priceLabel.text = price + Labels.Text.pln
@@ -96,7 +98,7 @@ extension AddNewOrderViewController: UICollectionViewDataSource {
 
 extension AddNewOrderViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 160, height: 140)
+        return CGSize(width: CollectionViewCell.width, height: CollectionViewCell.length)
     }
 }
 

@@ -133,17 +133,17 @@ final class LoginView: BaseView {
     // MARK: - Methods
     
     func setupLogin() {
-        headerSignInButton.setTitleColor(Color.darkGreen, for: .normal)
-        headerGetStartedButton.setTitleColor(Color.lightGreen, for: .normal)
-        rightActivityBar.isHidden = true
-        leftActivityBar.isHidden = false
+            self.headerSignInButton.setTitleColor(Color.darkGreen, for: .normal)
+            self.headerGetStartedButton.setTitleColor(Color.lightGreen, for: .normal)
+            self.rightActivityBar.isHidden = true
+            self.leftActivityBar.isHidden = false
     }
     
     func setupRegister() {
-        headerGetStartedButton.setTitleColor(Color.darkGreen, for: .normal)
-        headerSignInButton.setTitleColor(Color.lightGreen, for: .normal)
-        rightActivityBar.isHidden = false
-        leftActivityBar.isHidden = true
+            self.headerGetStartedButton.setTitleColor(Color.darkGreen, for: .normal)
+            self.headerSignInButton.setTitleColor(Color.lightGreen, for: .normal)
+            self.rightActivityBar.isHidden = false
+            self.leftActivityBar.isHidden = true
     }
 }
 

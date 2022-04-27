@@ -17,9 +17,9 @@ final class LoginViewController: BaseViewController<LoginView> {
         didSet {
             switch autorizationType {
             case .login:
-                contentView.setupLogin()
+                    self.contentView.setupLogin()
             case .register:
-                contentView.setupRegister()
+                    self.contentView.setupRegister()
             }
         }
     }
@@ -29,18 +29,12 @@ final class LoginViewController: BaseViewController<LoginView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         contentView.pageViews.reloadData()
-        self.hideKeyboardWhenTappedAround()
+        self.navigationController?.navigationBar.backItem?.title = ""
     }
     
     //MARK: - Setup
     
     override func setupView() {
-        self.navigationController?.isNavigationBarHidden = false
-        navigationItem.hidesBackButton = false
-        navigationController?.navigationBar.isUserInteractionEnabled = true
-        navigationController?.navigationBar.barStyle = UIBarStyle.black
-        navigationController?.navigationBar.tintColor = Color.white
-        
         contentView.pageViews.dataSource = self
         contentView.pageViews.delegate = self
         contentView.pageViews.register(LoginCollectionViewCell.self, forCellWithReuseIdentifier: LoginCollectionViewCell.identifier)
@@ -73,6 +67,7 @@ extension LoginViewController: UICollectionViewDataSource {
         let autorizationType = AuthorizationType(rawValue: indexPath.item)
         cell.delegateLoginData = self
         cell.delegateForgetPassword = self
+
         cell.emailTextField.text = nil
         cell.passwordTextField.text = nil
         cell.repeatPasswordTextField.text = nil
@@ -106,7 +101,7 @@ extension LoginViewController: LoginData {
             UserSession.shared.logIn(email: email, password: password) { [weak self] error, logStatus in
                 if logStatus == false {
                     self?.contentView.activityIndicatorView.isHidden = true
-                    self?.showAlert(title: "Error!", message: error, actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
+                    self?.showAlert(title: Alert.Title.error, message: error, actions: [Alert.Action.close])
                 } else {
                     self?.contentView.activityIndicatorView.isHidden = true
                     self?.navigationController?.popToRootViewController(animated: false)
@@ -118,7 +113,7 @@ extension LoginViewController: LoginData {
                 UserSession.shared.createUser(email: email, password: password) { [weak self] error, logStatus in
                     if logStatus == false {
                         self?.contentView.activityIndicatorView.isHidden = true
-                        self?.showAlert(title: "Error!", message: error, actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
+                        self?.showAlert(title: Alert.Title.error, message: error, actions: [Alert.Action.close])
                     } else {
                         let accountInfoViewController = AccountInfoViewController(newUser: true)
                         self?.contentView.activityIndicatorView.isHidden = true
@@ -126,7 +121,7 @@ extension LoginViewController: LoginData {
                     }
                 }
             } else {
-                showAlert(title: "Repeat password!", message: "Password does not match", actions: [UIAlertAction(title: "Back", style: .default, handler: nil)])
+                showAlert(title: Alert.Title.repeatPassword, message: Alert.Messege.passwordNotMatch, actions: [Alert.Action.close])
             }
         }
     }

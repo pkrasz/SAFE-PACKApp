@@ -38,17 +38,6 @@ final class CatalogViewController: BaseViewController<CatalogView> {
         }
     }
     
-    //MARK: - Lifecycle
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = false
-        navigationItem.hidesBackButton = false
-        navigationController?.navigationBar.isUserInteractionEnabled = true
-        navigationController?.navigationBar.barStyle = UIBarStyle.black
-        navigationController?.navigationBar.tintColor = Color.white
-        self.hideKeyboardWhenTappedAround()
-    }
-    
     //MARK: - Setup
     
     override func setupView() {

@@ -22,9 +22,9 @@ final class AddNewOrderView: BaseView {
     let productsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 20
-        layout.sectionInset.left = 17
-        layout.sectionInset.right = 17
+        layout.minimumLineSpacing = CollectionViewCell.miminumLineSpacing
+        layout.sectionInset.left = CollectionViewCell.sectionInset
+        layout.sectionInset.right = CollectionViewCell.sectionInset
         layout.collectionView?.center = CGPoint.zero
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +42,7 @@ final class AddNewOrderView: BaseView {
     
     let goToBasketButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.image = UIImage(systemName: "cart")
+        button.image = Image.cart
         button.tintColor = .white
         return button
     }()

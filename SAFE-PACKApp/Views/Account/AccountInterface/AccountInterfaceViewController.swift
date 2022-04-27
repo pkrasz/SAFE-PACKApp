@@ -24,6 +24,10 @@ final class AccountInterfaceViewController: BaseViewController<AccountInterfaceV
         super.viewWillAppear(animated)
         FirebaseClient.shared.getAccountInfo(userUID: UserSession.shared.UserInfo(about: User.id)) { [weak self] userInfo in
             self?.contentView.nameLabel.text = userInfo.companyName
+            
+            UIView.animate(withDuration: 0.4) {
+                self?.contentView.layoutIfNeeded()
+            }
         }
         contentView.emailLabel.text = UserSession.shared.UserInfo(about: User.email)
         
@@ -35,9 +39,7 @@ final class AccountInterfaceViewController: BaseViewController<AccountInterfaceV
     //MARK: - Setup
     
     override func setupView() {
-        navigationItem.hidesBackButton = true
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationController?.isNavigationBarHidden = false
+        navigationItem.setHidesBackButton(true, animated: true)
         navigationItem.rightBarButtonItem = contentView.infoButton
     }
     
@@ -89,6 +91,10 @@ final class AccountInterfaceViewController: BaseViewController<AccountInterfaceV
         let awaitingPaymentOrders: String = String(awaitingPaymentOrdersInt)
         contentView.ordersAwaitingPaymentLabel.text = awaitingPaymentOrders
         contentView.ordersInProgressLabel.text = progressOrders
+        
+        UIView.animate(withDuration: 0.4) {
+            self.contentView.layoutIfNeeded()
+        }
     }
     
     @objc func tapInfoButton() {

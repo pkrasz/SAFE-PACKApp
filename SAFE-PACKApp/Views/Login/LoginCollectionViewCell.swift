@@ -14,8 +14,6 @@ class LoginCollectionViewCell: UICollectionViewCell {
     static let identifier = "LoginCollectionViewCell "
     var delegateLoginData: LoginData?
     var delegateForgetPassword: ForgetPassword?
-//    var delegateVisiblePassword: VisiblePassword?
-//    var delegateVisiblePasswordTwo: VisiblePasswordTwo?
     var passwordIsHidden: Bool = true
     var repeatPasswordIsHidden: Bool = true
     
@@ -220,9 +218,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
             self.passwordIsHidden.toggle()
             self.passwordTextField.isSecureTextEntry.toggle()
             if passwordIsHidden == true {
-                visibilityPasswordButton.tintColor = Color.fontShadow
+                visibilityPasswordButton.setImage(Image.eye, for: .normal)
             } else {
-                visibilityPasswordButton.tintColor = Color.darkGreen
+                visibilityPasswordButton.setImage(Image.eyeFill, for: .normal)
             }
         }
         visibilityPasswordButton.addAction(tapVisiblePassword, for: .touchUpInside)
@@ -231,9 +229,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
             self.repeatPasswordIsHidden.toggle()
             self.repeatPasswordTextField.isSecureTextEntry.toggle()
             if repeatPasswordIsHidden == true {
-                visibilityPasswordTwoButton.tintColor = Color.fontShadow
+                visibilityPasswordTwoButton.setImage(Image.eye, for: .normal)
             } else {
-                visibilityPasswordTwoButton.tintColor = Color.darkGreen
+                visibilityPasswordTwoButton.setImage(Image.eyeFill, for: .normal)
             }
         }
         visibilityPasswordTwoButton.addAction(tapVisiblePasswordTwo, for: .touchUpInside)
@@ -257,11 +255,3 @@ protocol LoginData {
 protocol ForgetPassword {
     func forgetPassword()
 }
-
-//protocol VisiblePassword {
-//    func visiblePassword()
-//}
-//
-//protocol VisiblePasswordTwo {
-//    func visiblePasswordTwo()
-//}
