@@ -80,11 +80,11 @@ final class AccountInfoViewController: BaseViewController<AccountView> {
                     for index in 0..<informationDidChange.count {
                         if informationDidChange[index] == true {
                             switch index {
-                            case 0:
+                            case Fields.name:
                                 alertMessege += Labels.Text.name + Labels.Text.dash + name
-                            case 1:
+                            case Fields.NIP:
                                 alertMessege += Labels.Text.slash + Labels.Text.NIP + Labels.Text.dash + NIP
-                            case 2:
+                            case Fields.address:
                                 alertMessege += Labels.Text.slash + Labels.Text.deliveryAddress + Labels.Text.dash + address
                             default:
                                 Void()
@@ -126,19 +126,29 @@ final class AccountInfoViewController: BaseViewController<AccountView> {
         contentView.approveButton.addAction(tapApproveButton, for: .touchUpInside)
         
         let nameTextFieldIsEditing = UIAction { _ in
-            self.informationDidChange[0] = true
+            self.informationDidChange[Fields.name] = true
         }
         contentView.nameTextField.addAction(nameTextFieldIsEditing, for: .editingDidBegin)
         
         let NIPTextFieldIsEditing = UIAction { _ in
-            self.informationDidChange[1] = true
+            self.informationDidChange[Fields.NIP] = true
         }
         contentView.NIPTextField.addAction(NIPTextFieldIsEditing, for: .editingDidBegin)
         
         let deliveryAddressTextFieldIsEditing = UIAction { _ in
-            self.informationDidChange[2] = true
+            self.informationDidChange[Fields.address] = true
         }
         contentView.deliveryAddressTextField.addAction(deliveryAddressTextFieldIsEditing, for: .editingDidBegin)
+    }
+}
+
+    //MARK: - Extensions
+
+extension AccountInfoViewController {
+    enum Fields {
+        static let name: Int = 0
+        static let NIP: Int = 1
+        static let address: Int = 2
     }
 }
 

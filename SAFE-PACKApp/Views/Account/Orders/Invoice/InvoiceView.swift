@@ -17,7 +17,7 @@ final class InvoiceView: BaseView {
     let backgroundImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = Image.backgroundFour
+        image.image = Image.invoiceBackground
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -25,9 +25,9 @@ final class InvoiceView: BaseView {
     let invoicePDFView: PDFView = {
         let pdf = PDFView()
         pdf.translatesAutoresizingMaskIntoConstraints = false
-        pdf.layer.cornerRadius = 10
+        pdf.layer.cornerRadius = Subview.cornerRadius
         pdf.layer.borderColor = Color.darkGreen.cgColor
-        pdf.layer.borderWidth = 1
+        pdf.layer.borderWidth = Subview.borderWidth
         pdf.layer.masksToBounds = true
         return pdf
     }()
@@ -42,11 +42,11 @@ final class InvoiceView: BaseView {
     let saveToPhoneButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
+        button.layer.cornerRadius = Subview.cornerRadius
+        button.layer.borderWidth = Subview.borderWidth
         button.layer.borderColor = Color.darkGreen.cgColor
         button.backgroundColor = .white
-        button.setTitle(Buttons.Title.saveToPhone, for: .normal)
+        button.setTitle(Button.Title.saveToPhone, for: .normal)
         button.setTitleColor(Color.font, for: .normal)
         return button
     }()
@@ -73,20 +73,20 @@ final class InvoiceView: BaseView {
     override func setupConstraints() {
         NSLayoutConstraint.activate([
         
-            invoicePDFView.topAnchor.constraint(equalTo: topAnchor, constant: 140),
+            invoicePDFView.topAnchor.constraint(equalTo: topAnchor, constant: InvoiceConstraints.PDFTopSpace),
             invoicePDFView.leadingAnchor.constraint(equalTo: leadingAnchor),
             invoicePDFView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            invoicePDFView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.4142),
+            invoicePDFView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: InvoiceConstraints.proporcionA4),
             
-            availabilityUIImage.topAnchor.constraint(equalTo: invoicePDFView.topAnchor, constant: 10),
+            availabilityUIImage.topAnchor.constraint(equalTo: invoicePDFView.topAnchor, constant: InvoiceConstraints.imageTopSpace),
             availabilityUIImage.leadingAnchor.constraint(greaterThanOrEqualTo: invoicePDFView.leadingAnchor),
-            availabilityUIImage.trailingAnchor.constraint(equalTo: invoicePDFView.trailingAnchor, constant: -10),
+            availabilityUIImage.trailingAnchor.constraint(equalTo: invoicePDFView.trailingAnchor, constant: InvoiceConstraints.imageTrailing),
             availabilityUIImage.bottomAnchor.constraint(lessThanOrEqualTo: invoicePDFView.bottomAnchor),
             
-            saveToPhoneButton.topAnchor.constraint(equalTo: invoicePDFView.bottomAnchor, constant: 25),
+            saveToPhoneButton.topAnchor.constraint(equalTo: invoicePDFView.bottomAnchor, constant: InvoiceConstraints.buttonTopSpace),
             saveToPhoneButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            saveToPhoneButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
-            saveToPhoneButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
+            saveToPhoneButton.heightAnchor.constraint(equalToConstant: Button.Size.accountButtonHeight),
+            saveToPhoneButton.widthAnchor.constraint(equalToConstant: Button.Size.accountButtonWidth),
             saveToPhoneButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
             activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),

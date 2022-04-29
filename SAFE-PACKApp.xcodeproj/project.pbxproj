@@ -15,7 +15,7 @@
 		A85FB91D27FC48B4001E8BF9 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB91C27FC48B4001E8BF9 /* WelcomeView.swift */; };
 		A85FB91F27FC48C7001E8BF9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB91E27FC48C7001E8BF9 /* BaseView.swift */; };
 		A85FB92127FC48D7001E8BF9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB92027FC48D7001E8BF9 /* BaseViewController.swift */; };
-		A85FB92927FDB63D001E8BF9 /* Constatnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB92827FDB63D001E8BF9 /* Constatnts.swift */; };
+		A85FB92927FDB63D001E8BF9 /* OtherConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB92827FDB63D001E8BF9 /* OtherConstants.swift */; };
 		A85FB92B27FDB64F001E8BF9 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB92A27FDB64F001E8BF9 /* FirebaseClient.swift */; };
 		A85FB93027FDE993001E8BF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB92F27FDE993001E8BF9 /* LoginViewController.swift */; };
 		A85FB93227FDE9A6001E8BF9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB93127FDE9A6001E8BF9 /* LoginView.swift */; };
@@ -33,7 +33,6 @@
 		A85FB95027FE119D001E8BF9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A85FB94F27FE119D001E8BF9 /* FirebaseStorage */; };
 		A85FB95227FE119D001E8BF9 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = A85FB95127FE119D001E8BF9 /* FirebaseStorageSwift-Beta */; };
 		A85FB95A27FEFF2E001E8BF9 /* LoginCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB95927FEFF2E001E8BF9 /* LoginCollectionViewCell.swift */; };
-		A85FB95D28030D83001E8BF9 /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB95C28030D83001E8BF9 /* UIViewController + Extensions.swift */; };
 		A85FB9612804A323001E8BF9 /* AccountInterfaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB9602804A323001E8BF9 /* AccountInterfaceViewController.swift */; };
 		A85FB9632804A33A001E8BF9 /* AccountInterfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85FB9622804A33A001E8BF9 /* AccountInterfaceView.swift */; };
 		A8E33FA22807050D00230C2E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E33FA12807050D00230C2E /* UserInfo.swift */; };
@@ -58,6 +57,15 @@
 		A8F4E7CE2817382900681B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7CD2817382900681B48 /* ResetPasswordViewController.swift */; };
 		A8F4E7D02817383B00681B48 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7CF2817383B00681B48 /* ResetPasswordView.swift */; };
 		A8F4E7D228180FB300681B48 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7D128180FB300681B48 /* MailSender.swift */; };
+		A8F4E7D9281C06CB00681B48 /* ConstraintsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7D8281C06CB00681B48 /* ConstraintsConstant.swift */; };
+		A8F4E7DB281C095300681B48 /* ImageConstatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7DA281C095300681B48 /* ImageConstatns.swift */; };
+		A8F4E7DD281C099A00681B48 /* ColorConstatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7DC281C099A00681B48 /* ColorConstatns.swift */; };
+		A8F4E7DF281C09CF00681B48 /* AlertConstatnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7DE281C09CF00681B48 /* AlertConstatnts.swift */; };
+		A8F4E7E1281C0A7F00681B48 /* TextFieldConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7E0281C0A7F00681B48 /* TextFieldConstants.swift */; };
+		A8F4E7E3281C0AAD00681B48 /* LabelConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7E2281C0AAD00681B48 /* LabelConstants.swift */; };
+		A8F4E7E5281C0AF100681B48 /* ButtonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7E4281C0AF100681B48 /* ButtonConstants.swift */; };
+		A8F4E7E7281C0B3D00681B48 /* ObjectConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7E6281C0B3D00681B48 /* ObjectConstants.swift */; };
+		A8F4E7E9281C0BA600681B48 /* SubviewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7E8281C0BA600681B48 /* SubviewConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,7 +79,7 @@
 		A85FB91C27FC48B4001E8BF9 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A85FB91E27FC48C7001E8BF9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A85FB92027FC48D7001E8BF9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		A85FB92827FDB63D001E8BF9 /* Constatnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constatnts.swift; sourceTree = "<group>"; };
+		A85FB92827FDB63D001E8BF9 /* OtherConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherConstants.swift; sourceTree = "<group>"; };
 		A85FB92A27FDB64F001E8BF9 /* FirebaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		A85FB92F27FDE993001E8BF9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A85FB93127FDE9A6001E8BF9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -82,7 +90,6 @@
 		A85FB93B27FE086C001E8BF9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A85FB94227FE106F001E8BF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A85FB95927FEFF2E001E8BF9 /* LoginCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCollectionViewCell.swift; sourceTree = "<group>"; };
-		A85FB95C28030D83001E8BF9 /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 		A85FB9602804A323001E8BF9 /* AccountInterfaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInterfaceViewController.swift; sourceTree = "<group>"; };
 		A85FB9622804A33A001E8BF9 /* AccountInterfaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInterfaceView.swift; sourceTree = "<group>"; };
 		A8E33FA12807050D00230C2E /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -107,6 +114,15 @@
 		A8F4E7CD2817382900681B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A8F4E7CF2817383B00681B48 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		A8F4E7D128180FB300681B48 /* MailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
+		A8F4E7D8281C06CB00681B48 /* ConstraintsConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsConstant.swift; sourceTree = "<group>"; };
+		A8F4E7DA281C095300681B48 /* ImageConstatns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstatns.swift; sourceTree = "<group>"; };
+		A8F4E7DC281C099A00681B48 /* ColorConstatns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstatns.swift; sourceTree = "<group>"; };
+		A8F4E7DE281C09CF00681B48 /* AlertConstatnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertConstatnts.swift; sourceTree = "<group>"; };
+		A8F4E7E0281C0A7F00681B48 /* TextFieldConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConstants.swift; sourceTree = "<group>"; };
+		A8F4E7E2281C0AAD00681B48 /* LabelConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelConstants.swift; sourceTree = "<group>"; };
+		A8F4E7E4281C0AF100681B48 /* ButtonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConstants.swift; sourceTree = "<group>"; };
+		A8F4E7E6281C0B3D00681B48 /* ObjectConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConstants.swift; sourceTree = "<group>"; };
+		A8F4E7E8281C0BA600681B48 /* SubviewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubviewConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +162,6 @@
 		A85FB90227FC4723001E8BF9 /* SAFE-PACKApp */ = {
 			isa = PBXGroup;
 			children = (
-				A85FB95B28030D52001E8BF9 /* Extensions */,
 				A85FB90327FC4723001E8BF9 /* AppDelegate.swift */,
 				A85FB90527FC4723001E8BF9 /* SceneDelegate.swift */,
 				A85FB91B27FC4852001E8BF9 /* Views */,
@@ -183,8 +198,8 @@
 		A85FB91A27FC481B001E8BF9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A8F4E7D7281C06AD00681B48 /* Constants */,
 				A85FB93F27FE0A49001E8BF9 /* Base */,
-				A85FB92827FDB63D001E8BF9 /* Constatnts.swift */,
 				A85FB92A27FDB64F001E8BF9 /* FirebaseClient.swift */,
 				A8E33FA72809801500230C2E /* UserSession.swift */,
 				A8F4E7BE2810660C00681B48 /* Basket.swift */,
@@ -250,14 +265,6 @@
 				A85FB92027FC48D7001E8BF9 /* BaseViewController.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		A85FB95B28030D52001E8BF9 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				A85FB95C28030D83001E8BF9 /* UIViewController + Extensions.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A85FB95E2804A278001E8BF9 /* Account */ = {
@@ -337,6 +344,23 @@
 				A8F4E7CF2817383B00681B48 /* ResetPasswordView.swift */,
 			);
 			path = ResetPassword;
+			sourceTree = "<group>";
+		};
+		A8F4E7D7281C06AD00681B48 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A85FB92827FDB63D001E8BF9 /* OtherConstants.swift */,
+				A8F4E7D8281C06CB00681B48 /* ConstraintsConstant.swift */,
+				A8F4E7DA281C095300681B48 /* ImageConstatns.swift */,
+				A8F4E7DC281C099A00681B48 /* ColorConstatns.swift */,
+				A8F4E7DE281C09CF00681B48 /* AlertConstatnts.swift */,
+				A8F4E7E0281C0A7F00681B48 /* TextFieldConstants.swift */,
+				A8F4E7E2281C0AAD00681B48 /* LabelConstants.swift */,
+				A8F4E7E4281C0AF100681B48 /* ButtonConstants.swift */,
+				A8F4E7E6281C0B3D00681B48 /* ObjectConstants.swift */,
+				A8F4E7E8281C0BA600681B48 /* SubviewConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,17 +448,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8F4E7D228180FB300681B48 /* MailSender.swift in Sources */,
+				A8F4E7E1281C0A7F00681B48 /* TextFieldConstants.swift in Sources */,
+				A8F4E7DF281C09CF00681B48 /* AlertConstatnts.swift in Sources */,
 				A8E33FC4280EFF2C00230C2E /* InvoiceViewController.swift in Sources */,
+				A8F4E7DB281C095300681B48 /* ImageConstatns.swift in Sources */,
 				A8E33FBC280EFED300230C2E /* SingleOrderViewController.swift in Sources */,
 				A8E33FB0280EFDB400230C2E /* AddNewOrderView.swift in Sources */,
 				A8E33FA22807050D00230C2E /* UserInfo.swift in Sources */,
 				A8E33FB6280EFE1500230C2E /* BasketView.swift in Sources */,
+				A8F4E7D9281C06CB00681B48 /* ConstraintsConstant.swift in Sources */,
 				A8F4E7C3281153C200681B48 /* BasketProduct.swift in Sources */,
 				A8F4E7D02817383B00681B48 /* ResetPasswordView.swift in Sources */,
 				A8E33FBA280EFE3700230C2E /* OrdersViewController.swift in Sources */,
 				A85FB93827FDE9D3001E8BF9 /* CatalogViewController.swift in Sources */,
 				A85FB91F27FC48C7001E8BF9 /* BaseView.swift in Sources */,
 				A85FB93A27FDE9E2001E8BF9 /* CatalogView.swift in Sources */,
+				A8F4E7E7281C0B3D00681B48 /* ObjectConstants.swift in Sources */,
 				A8E33FB8280EFE2500230C2E /* OrdersView.swift in Sources */,
 				A8E33FB4280EFDD600230C2E /* BasketViewController.swift in Sources */,
 				A85FB90827FC4723001E8BF9 /* WelcomeViewController.swift in Sources */,
@@ -443,21 +472,24 @@
 				A85FB93427FDE9B8001E8BF9 /* AccountInfoView.swift in Sources */,
 				A8E33FB2280EFDC800230C2E /* AddNewOrderViewController.swift in Sources */,
 				A85FB92127FC48D7001E8BF9 /* BaseViewController.swift in Sources */,
-				A85FB95D28030D83001E8BF9 /* UIViewController + Extensions.swift in Sources */,
 				A8E33FC8280F4EE800230C2E /* AddNewOrderCollectionViewCell.swift in Sources */,
+				A8F4E7E5281C0AF100681B48 /* ButtonConstants.swift in Sources */,
 				A85FB95A27FEFF2E001E8BF9 /* LoginCollectionViewCell.swift in Sources */,
 				A8E33FC6280EFF4000230C2E /* InvoiceView.swift in Sources */,
+				A8F4E7DD281C099A00681B48 /* ColorConstatns.swift in Sources */,
 				A85FB90427FC4723001E8BF9 /* AppDelegate.swift in Sources */,
 				A85FB90627FC4723001E8BF9 /* SceneDelegate.swift in Sources */,
+				A8F4E7E3281C0AAD00681B48 /* LabelConstants.swift in Sources */,
 				A8E33FA4280868F600230C2E /* CatalogCollectionViewCell.swift in Sources */,
 				A85FB93227FDE9A6001E8BF9 /* LoginView.swift in Sources */,
+				A8F4E7E9281C0BA600681B48 /* SubviewConstants.swift in Sources */,
 				A8E33FBE280EFEE400230C2E /* SingleOrderView.swift in Sources */,
 				A85FB93627FDE9C6001E8BF9 /* AccountInfoViewController.swift in Sources */,
 				A8F4E7C52812CA1700681B48 /* OrdersTableViewCell.swift in Sources */,
 				A85FB91D27FC48B4001E8BF9 /* WelcomeView.swift in Sources */,
 				A85FB9632804A33A001E8BF9 /* AccountInterfaceView.swift in Sources */,
 				A8E33FA82809801500230C2E /* UserSession.swift in Sources */,
-				A85FB92927FDB63D001E8BF9 /* Constatnts.swift in Sources */,
+				A85FB92927FDB63D001E8BF9 /* OtherConstants.swift in Sources */,
 				A8F4E7C12811531400681B48 /* Order.swift in Sources */,
 				A85FB92B27FDB64F001E8BF9 /* FirebaseClient.swift in Sources */,
 				A8F4E7BF2810660C00681B48 /* Basket.swift in Sources */,
@@ -608,6 +640,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -635,6 +668,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

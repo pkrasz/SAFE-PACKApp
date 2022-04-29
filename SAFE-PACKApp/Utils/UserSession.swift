@@ -9,17 +9,14 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-enum User {
-    static let id: String = "id"
-    static let email: String = "email"
-}
-
 final class UserSession {
     
     //MARK: - Properties
     
     static var shared = UserSession()
     private var auth: Auth?
+    
+    //MARK: - Methods
     
     func setupClient() {
         auth = .auth()

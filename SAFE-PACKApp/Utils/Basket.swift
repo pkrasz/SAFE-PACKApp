@@ -95,7 +95,7 @@ class Basket {
     
     func completeOrder(completion: @escaping (Order) -> Void) {
         
-        let order = Order(productsList: productsList, orderNumber: orderNumber, orderPrice: basketValue, status: Status.awaitingAccepted, dateOfTheOrder: dateOfOrder, deliveryAddress: deliveryAddress, leadTime: leadTime, documentName: "-")
+        let order = Order(productsList: productsList, orderNumber: orderNumber, orderPrice: basketValue, status: StatusInt.awaitingAccepted, dateOfTheOrder: dateOfOrder, deliveryAddress: deliveryAddress, leadTime: leadTime, documentName: Labels.Text.dash)
         completion(order)
         
         productsList.removeAll()

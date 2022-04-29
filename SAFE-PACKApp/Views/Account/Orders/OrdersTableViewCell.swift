@@ -11,14 +11,14 @@ final class OrdersTableViewCell: UITableViewCell {
     
     //MARK: Properties
     
-    static let identifier = "OrdersTableViewCell"
+    static let identifier = Identifire.ordersTableViewCell
     
     //MARK: - Subview
     
     let orderNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.font
         return label
     }()
@@ -27,7 +27,7 @@ final class OrdersTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.slash + Labels.Text.date
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.font
         return label
     }()
@@ -35,14 +35,15 @@ final class OrdersTableViewCell: UITableViewCell {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.font
         return label
     }()
     
     let availabilityUIImage: UIImageView = {
-        let image = UIImageView(image: Image.availability)
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = Image.availability
         image.tintColor = Color.fontShadow
         return image
     }()
@@ -64,8 +65,8 @@ final class OrdersTableViewCell: UITableViewCell {
     //MARK: - Setup
     
     private func setupView() {
-        layer.cornerRadius = 10
-        layer.borderWidth = 1
+        layer.cornerRadius = Subview.cornerRadius
+        layer.borderWidth = Subview.borderWidth
         layer.borderColor = Color.darkGreen.cgColor
         backgroundColor = Color.white
     }
@@ -82,17 +83,17 @@ final class OrdersTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             
             orderNumberLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            orderNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            orderNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: OrdersCellConstraints.orderLabelTop),
             
             dateTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             dateTitleLabel.leadingAnchor.constraint(equalTo: orderNumberLabel.trailingAnchor),
             
             dateLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: dateTitleLabel.trailingAnchor, constant: 1),
+            dateLabel.leadingAnchor.constraint(equalTo: dateTitleLabel.trailingAnchor, constant: OrdersCellConstraints.dateLabelLeading),
             dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: availabilityUIImage.leadingAnchor),
             
             availabilityUIImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            availabilityUIImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            availabilityUIImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: OrdersCellConstraints.imageTrailing)
         ])
     }
 }

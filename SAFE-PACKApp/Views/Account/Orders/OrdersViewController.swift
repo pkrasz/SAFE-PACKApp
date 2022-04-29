@@ -35,16 +35,16 @@ final class OrdersViewController: BaseViewController<OrdersView> {
     //MARK: - Methods
     
     func reloadLocalData() {
-        var awaitingOrdersInt: Int = 0
-        var progressOrdersInt: Int = 0
-        var unpaidOrdersInt: Int = 0
+        var awaitingOrdersInt: Int = Empty.int
+        var progressOrdersInt: Int = Empty.int
+        var unpaidOrdersInt: Int = Empty.int
         for order in allOrders {
             switch order.status {
-            case Status.awaitingPayment:
+            case StatusInt.awaitingPayment:
                 awaitingOrdersInt += 1
-            case Status.inProgress:
+            case StatusInt.inProgress:
                 progressOrdersInt += 1
-            case Status.unpaid:
+            case StatusInt.unpaid:
                 unpaidOrdersInt += 1
             default:
                 Void()
@@ -83,13 +83,13 @@ extension OrdersViewController: UITableViewDataSource {
         cell.dateLabel.text = order.dateOfTheOrder
         
         switch order.status {
-        case Status.awaitingPayment:
+        case StatusInt.awaitingPayment:
             cell.availabilityUIImage.tintColor = Color.yellow
-        case Status.inProgress:
+        case StatusInt.inProgress:
             cell.availabilityUIImage.tintColor = Color.lightGreen
-        case Status.realized:
+        case StatusInt.realized:
             cell.availabilityUIImage.tintColor = Color.darkGreen
-        case Status.unpaid:
+        case StatusInt.unpaid:
             cell.availabilityUIImage.tintColor = Color.red
         default:
             Void()

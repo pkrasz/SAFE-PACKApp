@@ -11,7 +11,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    static let identifier = "AddNewOrderCollectionViewCell"
+    static let identifier = Identifire.addNewOrderCollectionViewCell
     var product: Product?
     var delegateaddToBasketButton: AddToBasketButton?
     
@@ -21,14 +21,14 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.box
-        label.font = .boldSystemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.catalog)
         return label
     }()
     
     let productNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -37,7 +37,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.size
-        label.font = .systemFont(ofSize: 8)
+        label.font = .systemFont(ofSize: Labels.FontSize.shopCells)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -45,7 +45,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     let lengthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 8)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.shopCells)
         label.textColor = Color.font
         return label
     }()
@@ -53,7 +53,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     let widthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 8)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.shopCells)
         label.textColor = Color.font
         return label
     }()
@@ -61,7 +61,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     let heightLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 8)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.shopCells)
         label.textColor = Color.font
         return label
     }()
@@ -77,7 +77,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.price
-        label.font = .systemFont(ofSize: 8)
+        label.font = .systemFont(ofSize: Labels.FontSize.shopCells)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -85,7 +85,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 8)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.shopCells)
         label.textColor = Color.font
         return label
     }()
@@ -94,7 +94,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.amount
-        label.font = .systemFont(ofSize: 8)
+        label.font = .systemFont(ofSize: Labels.FontSize.shopCells)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -102,7 +102,7 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     let amountTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.layer.borderWidth = 1
+        textField.layer.borderWidth = Subview.borderWidth
         textField.layer.borderColor = Color.fontShadow.cgColor
         textField.keyboardType = .numberPad
         return textField
@@ -112,8 +112,8 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(Image.plus, for: .normal)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 2
+        button.layer.cornerRadius = Subview.cornerRadius
+        button.layer.borderWidth = Subview.borerWidthShopCell
         button.layer.borderColor = Color.lightGreen.cgColor
         button.tintColor = Color.lightGreen
         return button
@@ -145,8 +145,8 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     private func setupView() {
         backgroundColor = Color.white
         layer.borderColor = Color.darkGreen.cgColor
-        layer.borderWidth = 2
-        layer.cornerRadius = 15
+        layer.borderWidth = Subview.borerWidthShopCell
+        layer.cornerRadius = Subview.cornerRadius
     }
     
     private func setupSubviews() {
@@ -168,30 +168,30 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            productNameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 7),
-            productNameTitleLabel.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor, constant: 50),
+            productNameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: AddNewOrderCellConstraints.Label.topSpace),
+            productNameTitleLabel.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor, constant: AddNewOrderCellConstraints.Label.productLeading),
             
             productNameLabel.topAnchor.constraint(equalTo: productNameTitleLabel.topAnchor),
             productNameLabel.leadingAnchor.constraint(equalTo: productNameTitleLabel.trailingAnchor),
             productNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             productNameLabel.bottomAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor),
             
-            sizeLabel.topAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor, constant: 7),
-            sizeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            sizeLabel.topAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor, constant: AddNewOrderCellConstraints.Label.topSpace),
+            sizeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AddNewOrderCellConstraints.Label.sizeLabelLeading),
             
-            lengthLabel.topAnchor.constraint(equalTo: sizeLabel.bottomAnchor, constant: 1),
+            lengthLabel.topAnchor.constraint(equalTo: sizeLabel.bottomAnchor, constant: AddNewOrderCellConstraints.Label.betweenSpace),
             lengthLabel.leadingAnchor.constraint(equalTo: sizeLabel.leadingAnchor),
             lengthLabel.trailingAnchor.constraint(lessThanOrEqualTo: sizeLabel.trailingAnchor),
             
-            widthLabel.topAnchor.constraint(equalTo: lengthLabel.bottomAnchor, constant: 1),
+            widthLabel.topAnchor.constraint(equalTo: lengthLabel.bottomAnchor, constant: AddNewOrderCellConstraints.Label.betweenSpace),
             widthLabel.leadingAnchor.constraint(equalTo: sizeLabel.leadingAnchor),
             widthLabel.trailingAnchor.constraint(lessThanOrEqualTo: sizeLabel.trailingAnchor),
             
-            heightLabel.topAnchor.constraint(equalTo: widthLabel.bottomAnchor, constant: 1),
+            heightLabel.topAnchor.constraint(equalTo: widthLabel.bottomAnchor, constant: AddNewOrderCellConstraints.Label.betweenSpace),
             heightLabel.leadingAnchor.constraint(equalTo: sizeLabel.leadingAnchor),
             heightLabel.trailingAnchor.constraint(lessThanOrEqualTo: sizeLabel.trailingAnchor),
             
-            priceTitleLabel.topAnchor.constraint(equalTo: heightLabel.bottomAnchor, constant: 7),
+            priceTitleLabel.topAnchor.constraint(equalTo: heightLabel.bottomAnchor, constant: AddNewOrderCellConstraints.Label.topSpace),
             priceTitleLabel.leadingAnchor.constraint(equalTo: sizeLabel.leadingAnchor),
             
             priceLabel.topAnchor.constraint(equalTo: priceTitleLabel.topAnchor),
@@ -199,27 +199,27 @@ final class AddNewOrderCollectionViewCell: UICollectionViewCell {
             priceLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             priceLabel.bottomAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor),
             
-            productImageView.topAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor, constant: 10),
-            productImageView.leadingAnchor.constraint(equalTo: widthLabel.trailingAnchor, constant: 10),
-            productImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            productImageView.bottomAnchor.constraint(equalTo: addToBasketButton.topAnchor, constant: -10),
+            productImageView.topAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor, constant: AddNewOrderCellConstraints.Image.topAnchor),
+            productImageView.leadingAnchor.constraint(equalTo: widthLabel.trailingAnchor, constant: AddNewOrderCellConstraints.Image.topAnchor),
+            productImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: AddNewOrderCellConstraints.Image.bottomAnchor),
+            productImageView.bottomAnchor.constraint(equalTo: addToBasketButton.topAnchor, constant: AddNewOrderCellConstraints.Image.bottomAnchor),
             
-            amountLabel.topAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor, constant: 7),
+            amountLabel.topAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor, constant: AddNewOrderCellConstraints.Label.topSpace),
             amountLabel.leadingAnchor.constraint(equalTo: sizeLabel.leadingAnchor),
             amountLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             
             amountTextField.topAnchor.constraint(equalTo: amountLabel.bottomAnchor),
             amountTextField.leadingAnchor.constraint(equalTo: sizeLabel.leadingAnchor),
-            amountTextField.widthAnchor.constraint(equalToConstant: 85),
-            amountTextField.heightAnchor.constraint(equalToConstant: 23),
+            amountTextField.widthAnchor.constraint(equalToConstant: AddNewOrderCellConstraints.TextField.width),
+            amountTextField.heightAnchor.constraint(equalToConstant: AddNewOrderCellConstraints.TextField.height),
             amountTextField.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
             addToBasketButton.topAnchor.constraint(greaterThanOrEqualTo: productImageView.bottomAnchor),
             addToBasketButton.leadingAnchor.constraint(greaterThanOrEqualTo: amountTextField.trailingAnchor),
-            addToBasketButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -9),
-            addToBasketButton.heightAnchor.constraint(equalToConstant: 31),
-            addToBasketButton.widthAnchor.constraint(equalToConstant: 31),
-            addToBasketButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
+            addToBasketButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: AddNewOrderCellConstraints.Button.bottom),
+            addToBasketButton.heightAnchor.constraint(equalToConstant: AddNewOrderCellConstraints.Button.height),
+            addToBasketButton.widthAnchor.constraint(equalToConstant: AddNewOrderCellConstraints.Button.height),
+            addToBasketButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: AddNewOrderCellConstraints.Button.bottom)
         ])
     }
     

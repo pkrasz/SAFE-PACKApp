@@ -14,7 +14,7 @@ final class ResetPasswordView: BaseView {
     let background: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = Image.accountInterfaceBackground
+        image.image = Image.accountBackgroundOne
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -23,7 +23,7 @@ final class ResetPasswordView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.resetYourPassword
-        label.font = .boldSystemFont(ofSize: 24)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.loginHeadLabel)
         label.textColor = Color.font
         return label
     }()
@@ -32,10 +32,10 @@ final class ResetPasswordView: BaseView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = TextFields.Text.emailField
-        textField.layer.cornerRadius = 10
+        textField.layer.cornerRadius = Subview.cornerRadius
         textField.backgroundColor = .white
-        textField.layer.shadowOpacity = 1
-        textField.layer.shadowRadius = 5
+        textField.layer.shadowOpacity = Subview.shadowOpacity
+        textField.layer.shadowRadius = Subview.shadowRadius
         textField.layer.shadowOffset = CGSize.zero
         textField.layer.shadowColor = UIColor.systemGray5.cgColor
         textField.keyboardType = .emailAddress
@@ -45,9 +45,9 @@ final class ResetPasswordView: BaseView {
     let resetPasswordButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Subview.cornerRadius
         button.backgroundColor = Color.lightGreen
-        button.setTitle(Buttons.Title.resetPassword, for: .normal)
+        button.setTitle(Button.Title.resetPassword, for: .normal)
         return button
     }()
     
@@ -68,19 +68,19 @@ final class ResetPasswordView: BaseView {
    override func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            headLabel.topAnchor.constraint(equalTo: topAnchor, constant: 240),
+            headLabel.topAnchor.constraint(equalTo: topAnchor, constant: LoginConstraint.repeatPasswordLabelTop),
             headLabel.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
             headLabel.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
             
             emailTextField.topAnchor.constraint(equalTo: headLabel.bottomAnchor, constant: TextFields.Size.betweenSpace),
             emailTextField.widthAnchor.constraint(equalToConstant: TextFields.Size.width),
-            emailTextField.heightAnchor.constraint(equalToConstant: Buttons.Size.height),
+            emailTextField.heightAnchor.constraint(equalToConstant: Button.Size.height),
             emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            resetPasswordButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Labels.Size.topSpace),
+            resetPasswordButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: LoginCellConstraints.topHeadLabel),
             resetPasswordButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            resetPasswordButton.widthAnchor.constraint(equalToConstant: Buttons.Size.width),
-            resetPasswordButton.heightAnchor.constraint(equalToConstant: Buttons.Size.height),
+            resetPasswordButton.widthAnchor.constraint(equalToConstant: Button.Size.width),
+            resetPasswordButton.heightAnchor.constraint(equalToConstant: Button.Size.height),
             
         ])
     }

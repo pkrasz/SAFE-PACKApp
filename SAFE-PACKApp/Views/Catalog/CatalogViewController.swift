@@ -17,7 +17,7 @@ final class CatalogViewController: BaseViewController<CatalogView> {
                 DispatchQueue.main.async {
                     FirebaseClient.shared.setImage(name: product.name){ [weak self] image in
                         guard let image = image else {return}
-                        self?.images.append(image)
+                        self?.images[product.name] = image
                     }
                     
                 }
@@ -26,7 +26,7 @@ final class CatalogViewController: BaseViewController<CatalogView> {
         }
     }
     
-    var images: [UIImage] = [] {
+    var images: [String:UIImage] = [:] {
         didSet {
             if images.count == products.count {
                 self.contentView.activityIndicatorView.isHidden = true
@@ -67,7 +67,7 @@ extension CatalogViewController: UICollectionViewDataSource {
         cell.sizesAdaptedLabelOne.text = "InPost - \(product.inPost)"
         cell.sizesAdaptedLabelTwo.text = "DHL - \(product.DHL)"
         cell.sizesAdaptedLabelThree.text = "Pocztex - \(product.pocztex)"
-        cell.productImageView.image = images[indexPath.item]
+        cell.productImageView.image = images[product.name]
         let labels: [UILabel] = [cell.recommendedLabelOne,
                                  cell.recommendedLabelTwo,
                                  cell.recommendedLabelThree,

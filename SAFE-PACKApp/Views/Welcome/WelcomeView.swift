@@ -9,20 +9,24 @@ import UIKit
 
 final class WelcomeView: BaseView {
     
+    //MARK: - Properties
+    
+    var logoTopAnchor: NSLayoutConstraint?
+
     //MARK: - SubView
     
     let welcomeImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "welcomeFirst")
+        image.image = Image.welcomeBackground
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         image.stopAnimating()
         return image
     }()
     
-    let darkLogoSPImageView: UIImageView = {
+    let LogoSPImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "DarkLogoSAFE-PACK")
+        image.image = Image.logoSafePack
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -30,9 +34,9 @@ final class WelcomeView: BaseView {
     
     let loginButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Subview.cornerRadius
         button.backgroundColor = Color.lightGreen
-        button.setTitle(Buttons.Title.login, for: .normal)
+        button.setTitle(Button.Title.login, for: .normal)
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -40,29 +44,25 @@ final class WelcomeView: BaseView {
     
     let catalogButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Subview.cornerRadius
         button.backgroundColor = Color.lightGreen
-        button.setTitle(Buttons.Title.products, for: .normal)
+        button.setTitle(Button.Title.products, for: .normal)
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    var logoTopAnchor: NSLayoutConstraint?
-
-    
     //MARK: - Setup
     
     override func setupView() {
-        
         backgroundColor = Color.white
         
-        logoTopAnchor = darkLogoSPImageView.topAnchor.constraint(equalTo: topAnchor, constant: LogoTopAnchor.loading)
+        logoTopAnchor = LogoSPImageView.topAnchor.constraint(equalTo: topAnchor, constant: LogoTopAnchor.loading)
     }
     
     override func setupSubviews() {
         addSubview(welcomeImageView)
-        addSubview(darkLogoSPImageView)
+        addSubview(LogoSPImageView)
         addSubview(loginButton)
         addSubview(catalogButton)
     }
@@ -72,21 +72,21 @@ final class WelcomeView: BaseView {
 
         NSLayoutConstraint.activate([
             
-            darkLogoSPImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            darkLogoSPImageView.heightAnchor.constraint(equalToConstant: LogoSize.height),
-            darkLogoSPImageView.widthAnchor.constraint(equalToConstant: LogoSize.width),
-            darkLogoSPImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
+            LogoSPImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            LogoSPImageView.heightAnchor.constraint(equalToConstant: LogoSize.height),
+            LogoSPImageView.widthAnchor.constraint(equalToConstant: LogoSize.width),
+            LogoSPImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
             logoTopAnchor,
-            loginButton.topAnchor.constraint(equalTo: darkLogoSPImageView.bottomAnchor, constant: 35),
+            loginButton.topAnchor.constraint(equalTo: LogoSPImageView.bottomAnchor, constant: WelcomeConstraints.logoBottom),
             loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: Buttons.Size.height),
-            loginButton.widthAnchor.constraint(equalToConstant: Buttons.Size.width),
+            loginButton.heightAnchor.constraint(equalToConstant: Button.Size.height),
+            loginButton.widthAnchor.constraint(equalToConstant: Button.Size.width),
             
-            catalogButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            catalogButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: WelcomeConstraints.loginBottom),
             catalogButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            catalogButton.heightAnchor.constraint(equalToConstant: Buttons.Size.height),
-            catalogButton.widthAnchor.constraint(equalToConstant: Buttons.Size.width)
+            catalogButton.heightAnchor.constraint(equalToConstant: Button.Size.height),
+            catalogButton.widthAnchor.constraint(equalToConstant: Button.Size.width)
             
             
         ])

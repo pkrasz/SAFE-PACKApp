@@ -59,10 +59,10 @@ final class AddNewOrderView: BaseView {
     override func setupConstraints() {
         NSLayoutConstraint.activate([
        
-        productsCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: 126),
+            productsCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: AddNewOrderConstraints.collectionViewTop),
         productsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
         productsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-        productsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -380),
+        productsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: AddNewOrderConstraints.collectionViewBottom),
         
         activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
         activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)

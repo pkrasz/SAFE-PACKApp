@@ -94,7 +94,7 @@ final class BasketViewController: BaseViewController<BasketView> {
     }
 }
 
-//MARK: - Extension
+//MARK: - Extensions
 
 extension BasketViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,12 +108,11 @@ extension BasketViewController: UITableViewDataSource {
         let totalPticeFloat = Float(basketProduct.totalPrice)
         let totalPtice = String(totalPticeFloat)
         
-        
         let name = Labels.Text.box + product.name
         let amountString = String(basketProduct.amount)
         let amount = Labels.Text.amount + amountString
         let price = Labels.Text.price + totalPtice + Labels.Text.pln
-        cell.textLabel?.font = .systemFont(ofSize: 11)
+        cell.textLabel?.font = .systemFont(ofSize: Labels.FontSize.tableView)
         cell.textLabel?.text = name + Labels.Text.slash + amount + Labels.Text.slash + price
         cell.selectionStyle = .none
         cell.backgroundColor = .clear

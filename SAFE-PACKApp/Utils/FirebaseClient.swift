@@ -22,6 +22,8 @@ final class FirebaseClient {
     private var storage: Storage?
     private var storageRef: StorageReference?
     
+    //MARK: - Methods
+    
     func setupClient() {
         FirebaseApp.configure()
         db = .firestore()
@@ -30,7 +32,6 @@ final class FirebaseClient {
     }
     
     func addOrder(userUID: String, with order: Order, completion: @escaping (Bool) -> Void) {
-        
         let orderID = String(order.orderNumber)
         
         do {
@@ -138,10 +139,6 @@ final class FirebaseClient {
         imageRef?.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
                 print(error.localizedDescription)
-                print("ERROR")
-                print(error)
-                print("FILE:")
-                print(fileName)
             } else {
                 let image = PDFDocument(data: data!)
                 completion(image)

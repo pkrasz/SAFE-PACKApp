@@ -13,7 +13,7 @@ final class LoginView: BaseView {
     
     let backgroundImageView: UIImageView = {
         let image = UIImageView()
-        image.image = Image.backbgroundLoginView
+        image.image = Image.loginBackground
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -22,7 +22,7 @@ final class LoginView: BaseView {
     let headerSignInButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Buttons.Title.signIn, for: .normal)
+        button.setTitle(Button.Title.signIn, for: .normal)
         button.setTitleColor(Color.darkGreen, for: .normal)
         button.setTitleColor(Color.darkGreen, for: .selected)
         button.backgroundColor = .white
@@ -32,7 +32,7 @@ final class LoginView: BaseView {
     let headerGetStartedButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Buttons.Title.getStarted, for: .normal)
+        button.setTitle(Button.Title.getStarted, for: .normal)
         button.setTitleColor(Color.lightGreen, for: .normal)
         button.setTitleColor(Color.darkGreen, for: .selected)
         button.backgroundColor = .white
@@ -57,8 +57,8 @@ final class LoginView: BaseView {
     let pageViews: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = Empty.cgFloat
+        layout.minimumLineSpacing = Empty.cgFloat
         let pages = UICollectionView(frame: .zero, collectionViewLayout: layout)
         pages.translatesAutoresizingMaskIntoConstraints = false
         pages.backgroundColor = Color.white
@@ -98,10 +98,10 @@ final class LoginView: BaseView {
     override func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            headerSignInButton.topAnchor.constraint(equalTo: topAnchor, constant: Constants.headerSignInButtonTop),
+            headerSignInButton.topAnchor.constraint(equalTo: topAnchor, constant: LoginConstraint.headerSignInButtonTop),
             headerSignInButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerSignInButton.trailingAnchor.constraint(equalTo: centerXAnchor),
-            headerSignInButton.heightAnchor.constraint(equalToConstant: Buttons.Size.headerButtonHeight),
+            headerSignInButton.heightAnchor.constraint(equalToConstant: Button.Size.headerButtonHeight),
             
             headerGetStartedButton.topAnchor.constraint(equalTo: headerSignInButton.topAnchor),
             headerGetStartedButton.leadingAnchor.constraint(equalTo: headerSignInButton.trailingAnchor),
@@ -112,18 +112,18 @@ final class LoginView: BaseView {
             leftActivityBar.leadingAnchor.constraint(equalTo: leadingAnchor),
             leftActivityBar.trailingAnchor.constraint(equalTo: headerSignInButton.trailingAnchor),
             leftActivityBar.widthAnchor.constraint(equalTo: headerSignInButton.widthAnchor),
-            leftActivityBar.heightAnchor.constraint(equalToConstant: Buttons.Size.activityBarHeight),
+            leftActivityBar.heightAnchor.constraint(equalToConstant: Button.Size.activityBarHeight),
             
             rightActivityBar.bottomAnchor.constraint(equalTo: headerSignInButton.bottomAnchor),
             rightActivityBar.leadingAnchor.constraint(equalTo: headerGetStartedButton.leadingAnchor),
             rightActivityBar.trailingAnchor.constraint(equalTo: trailingAnchor),
             rightActivityBar.widthAnchor.constraint(equalTo: headerSignInButton.widthAnchor),
-            rightActivityBar.heightAnchor.constraint(equalToConstant: Buttons.Size.activityBarHeight),
+            rightActivityBar.heightAnchor.constraint(equalToConstant: Button.Size.activityBarHeight),
             
             pageViews.topAnchor.constraint(equalTo: headerSignInButton.bottomAnchor),
             pageViews.leadingAnchor.constraint(equalTo: leadingAnchor),
             pageViews.trailingAnchor.constraint(equalTo: trailingAnchor),
-            pageViews.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.pageViewsBottom),
+            pageViews.bottomAnchor.constraint(equalTo: bottomAnchor, constant: LoginConstraint.pageViewsBottom),
             
             activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
             activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
@@ -144,13 +144,6 @@ final class LoginView: BaseView {
             self.headerSignInButton.setTitleColor(Color.lightGreen, for: .normal)
             self.rightActivityBar.isHidden = false
             self.leftActivityBar.isHidden = true
-    }
-}
-
-extension LoginView {
-    enum Constants {
-        static let headerSignInButtonTop: CGFloat = 162
-        static let pageViewsBottom: CGFloat = -200
     }
 }
 

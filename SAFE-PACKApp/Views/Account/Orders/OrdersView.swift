@@ -23,7 +23,7 @@ final class OrdersView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.numberOfAllOrders
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -31,7 +31,7 @@ final class OrdersView: BaseView {
     let allOrdersLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.label)
         label.textColor = Color.font
         return label
     }()
@@ -40,7 +40,7 @@ final class OrdersView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.numberOfUnpaidOrders
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -48,7 +48,7 @@ final class OrdersView: BaseView {
     let unpaidOrdersLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.label)
         label.textColor = Color.font
         return label
     }()
@@ -57,7 +57,7 @@ final class OrdersView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.numberOfAwaitingOrders
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -65,7 +65,7 @@ final class OrdersView: BaseView {
     let awaitngLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.label)
         label.textColor = Color.font
         return label
     }()
@@ -74,7 +74,7 @@ final class OrdersView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.numberOfOrdersInProgress
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -82,7 +82,7 @@ final class OrdersView: BaseView {
     let ordersInProgressLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.label)
         label.textColor = Color.font
         return label
     }()
@@ -131,45 +131,45 @@ final class OrdersView: BaseView {
     override func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            allOrdersTittleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 126),
-            allOrdersTittleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            allOrdersTittleLabel.topAnchor.constraint(equalTo: topAnchor, constant: OrdersConstraints.Label.allOrdersTop),
+            allOrdersTittleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: OrdersConstraints.leading),
             allOrdersTittleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             
-            allOrdersLabel.topAnchor.constraint(equalTo: allOrdersTittleLabel.bottomAnchor, constant: 1),
+            allOrdersLabel.topAnchor.constraint(equalTo: allOrdersTittleLabel.bottomAnchor, constant: OrdersConstraints.Label.betweenSpace),
             allOrdersLabel.leadingAnchor.constraint(equalTo: allOrdersTittleLabel.leadingAnchor),
             allOrdersLabel.trailingAnchor.constraint(equalTo: allOrdersTittleLabel.trailingAnchor),
             
-            unpaidOrdersTittleLabel.topAnchor.constraint(equalTo: allOrdersLabel.bottomAnchor, constant: 10),
+            unpaidOrdersTittleLabel.topAnchor.constraint(equalTo: allOrdersLabel.bottomAnchor, constant: OrdersConstraints.Label.topSpace),
             unpaidOrdersTittleLabel.leadingAnchor.constraint(equalTo: allOrdersTittleLabel.leadingAnchor),
             unpaidOrdersTittleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             
-            unpaidOrdersLabel.topAnchor.constraint(equalTo: unpaidOrdersTittleLabel.bottomAnchor, constant: 1),
+            unpaidOrdersLabel.topAnchor.constraint(equalTo: unpaidOrdersTittleLabel.bottomAnchor, constant: OrdersConstraints.Label.betweenSpace),
             unpaidOrdersLabel.leadingAnchor.constraint(equalTo: allOrdersTittleLabel.leadingAnchor),
             unpaidOrdersLabel.trailingAnchor.constraint(equalTo: unpaidOrdersTittleLabel.trailingAnchor),
             
             ordersInProgressTittleLabel.topAnchor.constraint(equalTo: allOrdersTittleLabel.topAnchor),
             ordersInProgressTittleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: allOrdersTittleLabel.trailingAnchor),
-            ordersInProgressTittleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            ordersInProgressTittleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: OrdersConstraints.trailing),
             
-            ordersInProgressLabel.topAnchor.constraint(equalTo: ordersInProgressTittleLabel.bottomAnchor, constant: 1),
+            ordersInProgressLabel.topAnchor.constraint(equalTo: ordersInProgressTittleLabel.bottomAnchor, constant: OrdersConstraints.Label.betweenSpace),
             ordersInProgressLabel.leadingAnchor.constraint(equalTo: ordersInProgressTittleLabel.leadingAnchor),
             ordersInProgressLabel.trailingAnchor.constraint(equalTo: ordersInProgressTittleLabel.trailingAnchor),
             
-            awaitingTittleLabel.topAnchor.constraint(equalTo: ordersInProgressLabel.bottomAnchor, constant: 10),
+            awaitingTittleLabel.topAnchor.constraint(equalTo: ordersInProgressLabel.bottomAnchor, constant: OrdersConstraints.Label.topSpace),
             awaitingTittleLabel.leadingAnchor.constraint(equalTo: ordersInProgressLabel.leadingAnchor),
             awaitingTittleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             
-            awaitngLabel.topAnchor.constraint(equalTo: awaitingTittleLabel.bottomAnchor, constant: 1),
+            awaitngLabel.topAnchor.constraint(equalTo: awaitingTittleLabel.bottomAnchor, constant: OrdersConstraints.Label.betweenSpace),
             awaitngLabel.leadingAnchor.constraint(equalTo: awaitingTittleLabel.leadingAnchor),
             awaitngLabel.trailingAnchor.constraint(equalTo: awaitingTittleLabel.trailingAnchor),
             
-            lineImage.topAnchor.constraint(equalTo: awaitngLabel.bottomAnchor, constant: 20),
+            lineImage.topAnchor.constraint(equalTo: awaitngLabel.bottomAnchor, constant: OrdersConstraints.Line.topSpace),
             lineImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            orderTableView.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 20),
-            orderTableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            orderTableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            orderTableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -270),
+            orderTableView.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: OrdersConstraints.Line.topSpace),
+            orderTableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: OrdersConstraints.leading),
+            orderTableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: OrdersConstraints.trailing),
+            orderTableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: OrdersConstraints.bottom),
             
             activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
             activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)

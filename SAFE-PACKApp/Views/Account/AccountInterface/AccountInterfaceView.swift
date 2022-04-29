@@ -14,7 +14,7 @@ final class AccountInterfaceView: BaseView {
     let background: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = Image.accountInterfaceBackground
+        image.image = Image.accountBackgroundOne
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -23,7 +23,7 @@ final class AccountInterfaceView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.name
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -31,7 +31,7 @@ final class AccountInterfaceView: BaseView {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.label)
         label.textColor = Color.font
         return label
     }()
@@ -40,7 +40,7 @@ final class AccountInterfaceView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.email
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -48,7 +48,7 @@ final class AccountInterfaceView: BaseView {
     let emailLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.label)
         label.textColor = Color.font
         return label
     }()
@@ -65,7 +65,7 @@ final class AccountInterfaceView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.ordersAwaitingPayment
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -73,7 +73,7 @@ final class AccountInterfaceView: BaseView {
     let ordersAwaitingPaymentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -82,7 +82,7 @@ final class AccountInterfaceView: BaseView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.ordersInProgress
-        label.font = .systemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.fontShadow
         return label
     }()
@@ -90,7 +90,7 @@ final class AccountInterfaceView: BaseView {
     let ordersInProgressLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.labelTitleFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.labelTitle)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -107,11 +107,11 @@ final class AccountInterfaceView: BaseView {
     let addAnOrderButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
+        button.layer.cornerRadius = Subview.cornerRadius
+        button.layer.borderWidth = Subview.borderWidth
         button.layer.borderColor = Color.darkGreen.cgColor
         button.backgroundColor = .white
-        button.setTitle(Buttons.Title.addAnOrder, for: .normal)
+        button.setTitle(Button.Title.addAnOrder, for: .normal)
         button.setTitleColor(Color.font, for: .normal)
         return button
     }()
@@ -119,11 +119,11 @@ final class AccountInterfaceView: BaseView {
     let yourOrdersButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
+        button.layer.cornerRadius = Subview.cornerRadius
+        button.layer.borderWidth = Subview.borderWidth
         button.layer.borderColor = Color.darkGreen.cgColor
         button.backgroundColor = .white
-        button.setTitle(Buttons.Title.yourOrders, for: .normal)
+        button.setTitle(Button.Title.yourOrders, for: .normal)
         button.setTitleColor(Color.font, for: .normal)
         return button
     }()
@@ -131,18 +131,18 @@ final class AccountInterfaceView: BaseView {
     let logOutButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
+        button.layer.cornerRadius = Subview.cornerRadius
+        button.layer.borderWidth = Subview.borderWidth
         button.layer.borderColor = Color.red.cgColor
         button.backgroundColor = .white
-        button.setTitle(Buttons.Title.logOut, for: .normal)
+        button.setTitle(Button.Title.logOut, for: .normal)
         button.setTitleColor(Color.red, for: .normal)
         return button
     }()
     
     let infoButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.image = UIImage(systemName: "info.circle")
+        button.image = Image.info
         button.tintColor = .white
         return button
     }()
@@ -183,58 +183,58 @@ final class AccountInterfaceView: BaseView {
     override func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            nameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 127),
-            nameTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35),
+            nameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: AccountInterfaceConstraints.Label.firstTitleTop),
+            nameTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AccountInterfaceConstraints.Label.titleLeading),
             
-            nameLabel.topAnchor.constraint(equalTo: nameTitleLabel.bottomAnchor, constant: 5),
+            nameLabel.topAnchor.constraint(equalTo: nameTitleLabel.bottomAnchor, constant: AccountInterfaceConstraints.Label.between),
             nameLabel.leadingAnchor.constraint(equalTo: nameTitleLabel.leadingAnchor),
             nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: nameTitleLabel.trailingAnchor),
             
-            emailTitleLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
+            emailTitleLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: AccountInterfaceConstraints.Label.secondTitleTop),
             emailTitleLabel.leadingAnchor.constraint(equalTo: nameTitleLabel.leadingAnchor),
             
-            emailLabel.topAnchor.constraint(equalTo: emailTitleLabel.bottomAnchor, constant: 5),
+            emailLabel.topAnchor.constraint(equalTo: emailTitleLabel.bottomAnchor, constant: AccountInterfaceConstraints.Label.between),
             emailLabel.leadingAnchor.constraint(equalTo: nameTitleLabel.leadingAnchor),
             emailLabel.trailingAnchor.constraint(lessThanOrEqualTo: emailTitleLabel.trailingAnchor),
             
-            lineImage.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 20),
+            lineImage.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: AccountInterfaceConstraints.Line.topSpace),
             lineImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            ordersAwaitingPaymentTitleLabel.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 20),
+            ordersAwaitingPaymentTitleLabel.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: AccountInterfaceConstraints.Line.topSpace),
             ordersAwaitingPaymentTitleLabel.leadingAnchor.constraint(equalTo: nameTitleLabel.leadingAnchor),
             
             ordersAwaitingPaymentLabel.topAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.topAnchor),
-            ordersAwaitingPaymentLabel.leadingAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.trailingAnchor, constant: 5),
+            ordersAwaitingPaymentLabel.leadingAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.trailingAnchor, constant: AccountInterfaceConstraints.Label.between),
             ordersAwaitingPaymentLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             ordersAwaitingPaymentLabel.bottomAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.bottomAnchor),
             
-            ordersInProgressTitleLabel.topAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.bottomAnchor, constant: 10),
+            ordersInProgressTitleLabel.topAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.bottomAnchor, constant: AccountInterfaceConstraints.Label.secondTitleTop),
             ordersInProgressTitleLabel.leadingAnchor.constraint(equalTo: ordersAwaitingPaymentTitleLabel.leadingAnchor),
             
             ordersInProgressLabel.topAnchor.constraint(equalTo: ordersInProgressTitleLabel.topAnchor),
-            ordersInProgressLabel.leadingAnchor.constraint(equalTo: ordersInProgressTitleLabel.trailingAnchor, constant: 5),
+            ordersInProgressLabel.leadingAnchor.constraint(equalTo: ordersInProgressTitleLabel.trailingAnchor, constant: AccountInterfaceConstraints.Label.between),
             ordersInProgressLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             ordersInProgressLabel.bottomAnchor.constraint(equalTo: ordersInProgressTitleLabel.bottomAnchor),
             
-            lineSecondImage.topAnchor.constraint(equalTo: ordersInProgressTitleLabel.bottomAnchor, constant: 20),
+            lineSecondImage.topAnchor.constraint(equalTo: ordersInProgressTitleLabel.bottomAnchor, constant: AccountInterfaceConstraints.Line.topSpace),
             lineSecondImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            addAnOrderButton.topAnchor.constraint(equalTo: lineSecondImage.bottomAnchor, constant: 20),
+            addAnOrderButton.topAnchor.constraint(equalTo: lineSecondImage.bottomAnchor, constant: AccountInterfaceConstraints.Line.topSpace),
             addAnOrderButton.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
-            addAnOrderButton.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -5),
-            addAnOrderButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
-            addAnOrderButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
+            addAnOrderButton.trailingAnchor.constraint(equalTo: centerXAnchor, constant: AccountInterfaceConstraints.Button.trailing),
+            addAnOrderButton.heightAnchor.constraint(equalToConstant: Button.Size.accountButtonHeight),
+            addAnOrderButton.widthAnchor.constraint(equalToConstant: Button.Size.accountButtonWidth),
             
             yourOrdersButton.topAnchor.constraint(equalTo: addAnOrderButton.topAnchor),
-            yourOrdersButton.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 5),
+            yourOrdersButton.leadingAnchor.constraint(equalTo: centerXAnchor, constant: AccountInterfaceConstraints.Button.leading),
             yourOrdersButton.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-            yourOrdersButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
-            yourOrdersButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
+            yourOrdersButton.heightAnchor.constraint(equalToConstant: Button.Size.accountButtonHeight),
+            yourOrdersButton.widthAnchor.constraint(equalToConstant: Button.Size.accountButtonWidth),
             
-            logOutButton.topAnchor.constraint(equalTo: addAnOrderButton.bottomAnchor, constant: 10),
+            logOutButton.topAnchor.constraint(equalTo: addAnOrderButton.bottomAnchor, constant: AccountInterfaceConstraints.Button.top),
             logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logOutButton.heightAnchor.constraint(equalToConstant: Buttons.Size.accountButtonHeight),
-            logOutButton.widthAnchor.constraint(equalToConstant: Buttons.Size.accountButtonWidth),
+            logOutButton.heightAnchor.constraint(equalToConstant: Button.Size.accountButtonHeight),
+            logOutButton.widthAnchor.constraint(equalToConstant: Button.Size.accountButtonWidth),
             logOutButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
             activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),

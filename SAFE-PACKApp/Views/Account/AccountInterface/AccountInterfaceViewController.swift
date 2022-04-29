@@ -74,9 +74,9 @@ final class AccountInterfaceViewController: BaseViewController<AccountInterfaceV
         var awaitingPaymentOrdersInt: Int = 0
         for order in allOrders {
             switch order.status {
-            case Status.inProgress:
+            case StatusInt.inProgress:
                 progressOrdersInt += 1
-            case Status.awaitingPayment:
+            case StatusInt.awaitingPayment:
                 awaitingPaymentOrdersInt += 1
             default:
                 Void()

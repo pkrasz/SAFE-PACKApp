@@ -73,7 +73,7 @@ extension LoginViewController: UICollectionViewDataSource {
         cell.repeatPasswordTextField.text = nil
         if autorizationType == .register {
             cell.headLabel.text = Labels.Text.headRegisterLabel
-            cell.loginButton.setTitle(Buttons.Title.register, for: .normal)
+            cell.loginButton.setTitle(Button.Title.register, for: .normal)
             cell.forgetPasswordLabel.isHidden = true
             cell.repeatPasswordTextField.isHidden = false
             cell.termsPrivatyLabel.isHidden = false

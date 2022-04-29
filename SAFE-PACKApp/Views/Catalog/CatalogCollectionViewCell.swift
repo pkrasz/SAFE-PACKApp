@@ -11,7 +11,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    static let identifier = "CatalogCollectionViewCell"
+    static let identifier = Identifire.catalogCollectionViewCell
     
     //MARK: - Subview
     
@@ -19,7 +19,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.box
-        label.font = .boldSystemFont(ofSize: Labels.Size.topSpace)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.loginHeadLabel)
         label.textColor = Color.font
         return label
     }()
@@ -27,7 +27,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let productNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: Labels.Size.topSpace)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.loginHeadLabel)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -44,7 +44,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.recommended
-        label.font = .boldSystemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -52,7 +52,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let recommendedLabelOne: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -60,7 +60,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let recommendedLabelTwo: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -68,7 +68,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let recommendedLabelThree: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -76,7 +76,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let recommendedLabelFour: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -84,7 +84,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let recommendedLabelFive: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -92,7 +92,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let recommendedLabelSix: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -101,7 +101,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.sizeOfPackage
-        label.font = .boldSystemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -109,7 +109,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let sizeOfPackageLabelOne: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -117,7 +117,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let sizeOfPackageLabelTwo: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -125,7 +125,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let sizeOfPackageLabelThree: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -134,7 +134,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Labels.Text.recommended
-        label.font = .boldSystemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .boldSystemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.darkGreen
         return label
     }()
@@ -142,7 +142,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let sizesAdaptedLabelOne: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -150,7 +150,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let sizesAdaptedLabelTwo: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -158,7 +158,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     let sizesAdaptedLabelThree: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: Labels.Size.catalogFont)
+        label.font = .systemFont(ofSize: Labels.FontSize.catalog)
         label.textColor = Color.font
         return label
     }()
@@ -210,71 +210,71 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            productNameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
-            productNameTitleLabel.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor, constant: 128),
+            productNameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: CatalogConstraints.Label.titleTop),
+            productNameTitleLabel.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor, constant: CatalogConstraints.Label.titleLeading),
             
             productNameLabel.topAnchor.constraint(equalTo: productNameTitleLabel.topAnchor),
             productNameLabel.leadingAnchor.constraint(equalTo: productNameTitleLabel.trailingAnchor),
-            productNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -128),
+            productNameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: CatalogConstraints.Label.titleTrailing),
             productNameLabel.bottomAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor),
             
-            productImageView.topAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor, constant: 25),
+            productImageView.topAnchor.constraint(equalTo: productNameTitleLabel.bottomAnchor, constant: CatalogConstraints.Label.titleTop),
             productImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            productImageView.heightAnchor.constraint(equalToConstant: 250),
-            productImageView.widthAnchor.constraint(equalToConstant: 250),
+            productImageView.heightAnchor.constraint(equalToConstant: CatalogConstraints.Image.height),
+            productImageView.widthAnchor.constraint(equalToConstant: CatalogConstraints.Image.height),
             
-            recommendedTitleLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 25),
-            recommendedTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            recommendedTitleLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: CatalogConstraints.Label.titleTop),
+            recommendedTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: CatalogConstraints.Label.titleTop),
             recommendedTitleLabel.trailingAnchor.constraint(lessThanOrEqualTo: sizeOfPackageTitleLabel.leadingAnchor),
             
-            recommendedLabelOne.topAnchor.constraint(equalTo: recommendedTitleLabel.bottomAnchor, constant: 10),
+            recommendedLabelOne.topAnchor.constraint(equalTo: recommendedTitleLabel.bottomAnchor, constant: CatalogConstraints.Label.recommendedTop),
             recommendedLabelOne.leadingAnchor.constraint(equalTo: recommendedTitleLabel.leadingAnchor),
             
-            recommendedLabelTwo.topAnchor.constraint(equalTo: recommendedLabelOne.bottomAnchor, constant: 1),
+            recommendedLabelTwo.topAnchor.constraint(equalTo: recommendedLabelOne.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             recommendedLabelTwo.leadingAnchor.constraint(equalTo: recommendedTitleLabel.leadingAnchor),
             
-            recommendedLabelThree.topAnchor.constraint(equalTo: recommendedLabelTwo.bottomAnchor, constant: 1),
+            recommendedLabelThree.topAnchor.constraint(equalTo: recommendedLabelTwo.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             recommendedLabelThree.leadingAnchor.constraint(equalTo: recommendedTitleLabel.leadingAnchor),
             
-            recommendedLabelFour.topAnchor.constraint(equalTo: recommendedLabelThree.bottomAnchor, constant: 1),
+            recommendedLabelFour.topAnchor.constraint(equalTo: recommendedLabelThree.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             recommendedLabelFour.leadingAnchor.constraint(equalTo: recommendedTitleLabel.leadingAnchor),
             
-            recommendedLabelFive.topAnchor.constraint(equalTo: recommendedLabelFour.bottomAnchor, constant: 1),
+            recommendedLabelFive.topAnchor.constraint(equalTo: recommendedLabelFour.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             recommendedLabelFive.leadingAnchor.constraint(equalTo: recommendedTitleLabel.leadingAnchor),
             
-            recommendedLabelSix.topAnchor.constraint(equalTo: recommendedLabelFive.bottomAnchor, constant: 1),
+            recommendedLabelSix.topAnchor.constraint(equalTo: recommendedLabelFive.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             recommendedLabelSix.leadingAnchor.constraint(equalTo: recommendedTitleLabel.leadingAnchor),
             
             sizeOfPackageTitleLabel.topAnchor.constraint(equalTo: recommendedTitleLabel.topAnchor),
-            sizeOfPackageTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25),
+            sizeOfPackageTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: CatalogConstraints.Label.packSizeTitleTrailing),
             
-            sizeOfPackageLabelOne.topAnchor.constraint(equalTo: sizeOfPackageTitleLabel.bottomAnchor, constant: 10),
+            sizeOfPackageLabelOne.topAnchor.constraint(equalTo: sizeOfPackageTitleLabel.bottomAnchor, constant: CatalogConstraints.Label.packSizeTitleTop),
             sizeOfPackageLabelOne.leadingAnchor.constraint(equalTo: sizeOfPackageTitleLabel.leadingAnchor),
             
-            sizeOfPackageLabelTwo.topAnchor.constraint(equalTo: sizeOfPackageLabelOne.bottomAnchor, constant: 1),
+            sizeOfPackageLabelTwo.topAnchor.constraint(equalTo: sizeOfPackageLabelOne.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             sizeOfPackageLabelTwo.leadingAnchor.constraint(equalTo: sizeOfPackageTitleLabel.leadingAnchor),
             
-            sizeOfPackageLabelThree.topAnchor.constraint(equalTo: sizeOfPackageLabelTwo.bottomAnchor, constant: 1),
+            sizeOfPackageLabelThree.topAnchor.constraint(equalTo: sizeOfPackageLabelTwo.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             sizeOfPackageLabelThree.leadingAnchor.constraint(equalTo: sizeOfPackageTitleLabel.leadingAnchor),
             sizeOfPackageLabelThree.bottomAnchor.constraint(lessThanOrEqualTo: recommendedLabelSix.bottomAnchor),
             
-            sizesAdaptedTitleLabel.topAnchor.constraint(equalTo: recommendedLabelFive.bottomAnchor, constant: 50),
+            sizesAdaptedTitleLabel.topAnchor.constraint(equalTo: recommendedLabelFive.bottomAnchor, constant: CatalogConstraints.Label.adaptedTitleSizeTop),
             sizesAdaptedTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            sizesAdaptedLabelOne.topAnchor.constraint(equalTo: sizesAdaptedTitleLabel.bottomAnchor, constant: 20),
+            sizesAdaptedLabelOne.topAnchor.constraint(equalTo: sizesAdaptedTitleLabel.bottomAnchor, constant: CatalogConstraints.Label.adaptedSizeTop),
             sizesAdaptedLabelOne.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            sizesAdaptedLabelTwo.topAnchor.constraint(equalTo: sizesAdaptedLabelOne.bottomAnchor, constant: 1),
+            sizesAdaptedLabelTwo.topAnchor.constraint(equalTo: sizesAdaptedLabelOne.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             sizesAdaptedLabelTwo.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            sizesAdaptedLabelThree.topAnchor.constraint(equalTo: sizesAdaptedLabelTwo.bottomAnchor, constant: 1),
+            sizesAdaptedLabelThree.topAnchor.constraint(equalTo: sizesAdaptedLabelTwo.bottomAnchor, constant: CatalogConstraints.Label.betweenSpace),
             sizesAdaptedLabelThree.centerXAnchor.constraint(equalTo: centerXAnchor),
             sizesAdaptedLabelThree.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
-            sizeAdaptedFrame.topAnchor.constraint(equalTo: sizesAdaptedTitleLabel.topAnchor, constant: -10),
-            sizeAdaptedFrame.leadingAnchor.constraint(equalTo: sizesAdaptedTitleLabel.leadingAnchor, constant: -10),
-            sizeAdaptedFrame.trailingAnchor.constraint(equalTo: sizesAdaptedTitleLabel.trailingAnchor, constant: 10),
-            sizeAdaptedFrame.bottomAnchor.constraint(equalTo: sizesAdaptedLabelThree.bottomAnchor, constant: 10)
+            sizeAdaptedFrame.topAnchor.constraint(equalTo: sizesAdaptedTitleLabel.topAnchor, constant: CatalogConstraints.Frame.topAnchor),
+            sizeAdaptedFrame.leadingAnchor.constraint(equalTo: sizesAdaptedTitleLabel.leadingAnchor, constant: CatalogConstraints.Frame.topAnchor),
+            sizeAdaptedFrame.trailingAnchor.constraint(equalTo: sizesAdaptedTitleLabel.trailingAnchor, constant: CatalogConstraints.Frame.bottomAnchor),
+            sizeAdaptedFrame.bottomAnchor.constraint(equalTo: sizesAdaptedLabelThree.bottomAnchor, constant: CatalogConstraints.Frame.bottomAnchor)
         ])
     }
 }

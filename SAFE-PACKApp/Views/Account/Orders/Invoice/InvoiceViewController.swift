@@ -42,9 +42,9 @@ final class InvoiceViewController: BaseViewController<InvoiceView> {
             didSet {
                 FirebaseClient.shared.getInvoices(userName: userName, userID: userID, orderNumber: order.orderNumber, documentName: order.documentName) { [weak self] image in
                     self?.invoicePDF = image
-                    if self?.order.status == Status.awaitingPayment {
+                    if self?.order.status == StatusInt.awaitingPayment {
                         self?.contentView.availabilityUIImage.tintColor = Color.yellow
-                    } else if self?.order.status == Status.unpaid {
+                    } else if self?.order.status == StatusInt.unpaid {
                         self?.contentView.availabilityUIImage.tintColor = Color.red
                     } else {
                         self?.contentView.availabilityUIImage.tintColor = Color.darkGreen

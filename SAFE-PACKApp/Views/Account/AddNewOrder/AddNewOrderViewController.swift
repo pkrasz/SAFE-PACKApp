@@ -17,14 +17,14 @@ final class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
                 DispatchQueue.main.async {
                     FirebaseClient.shared.setImage(name: product.name){ [weak self] image in
                         guard let image = image else {return}
-                        self?.images.append(image)
+                        self?.images[product.name] = image
                     }
                 }
             }
         }
     }
     
-    var images: [UIImage] = [] {
+    var images: [String:UIImage] = [:] {
         didSet {
             if images.count == products.count {
                 self.contentView.activityIndicatorView.isHidden = true
@@ -71,7 +71,7 @@ final class AddNewOrderViewController: BaseViewController<AddNewOrderView> {
     }
 }
 
-//MARK: - Extension
+//MARK: - Extensions
 
 extension AddNewOrderViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -89,7 +89,7 @@ extension AddNewOrderViewController: UICollectionViewDataSource {
         cell.lengthLabel.text = TextFields.Text.l + product.length
         cell.widthLabel.text = TextFields.Text.w + product.width
         cell.heightLabel.text = TextFields.Text.h + product.height
-        cell.productImageView.image = images[indexPath.item]
+        cell.productImageView.image = images[product.name]
         let price: String = String(product.price)
         cell.priceLabel.text = price + Labels.Text.pln
         return cell
@@ -108,3 +108,4 @@ extension AddNewOrderViewController: AddToBasketButton {
         contentView.productsCollectionView.reloadData()
     }
 }
+

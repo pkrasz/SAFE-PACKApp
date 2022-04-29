@@ -37,26 +37,31 @@ final class SingleOrderViewController: BaseViewController<SingleOrderView> {
         contentView.orderAmountLabel.text = orderAmount + Labels.Text.pln
         contentView.leadTimeLabel.text = order.leadTime
         contentView.deliveryAddressLabel.text = order.deliveryAddress
-        contentView.statusLabel.text = order.status
         contentView.dateLabel.text = order.dateOfTheOrder
         
         switch order.status {
-        case Status.awaitingPayment:
+        case StatusInt.awaitingAccepted:
+            contentView.statusLabel.text = Status.awaitingAccepted
+        case StatusInt.awaitingPayment:
+            contentView.statusLabel.text = Status.awaitingPayment
             contentView.availabilityUIImage.tintColor = Color.yellow
             contentView.showInvoiceButton.isHidden = false
-            contentView.showInvoiceButton.setTitle(Buttons.Title.proforma, for: .normal)
-        case Status.inProgress:
+            contentView.showInvoiceButton.setTitle(Button.Title.proforma, for: .normal)
+        case StatusInt.inProgress:
+            contentView.statusLabel.text = Status.inProgress
             contentView.availabilityUIImage.tintColor = Color.lightGreen
             contentView.showInvoiceButton.isHidden = false
-            contentView.showInvoiceButton.setTitle(Buttons.Title.invoice, for: .normal)
-        case Status.realized:
+            contentView.showInvoiceButton.setTitle(Button.Title.invoice, for: .normal)
+        case StatusInt.realized:
+            contentView.statusLabel.text = Status.realized
             contentView.availabilityUIImage.tintColor = Color.darkGreen
             contentView.showInvoiceButton.isHidden = false
-            contentView.showInvoiceButton.setTitle(Buttons.Title.invoice, for: .normal)
-        case Status.unpaid:
+            contentView.showInvoiceButton.setTitle(Button.Title.invoice, for: .normal)
+        case StatusInt.unpaid:
+            contentView.statusLabel.text = Status.unpaid
             contentView.availabilityUIImage.tintColor = Color.red
             contentView.showInvoiceButton.isHidden = false
-            contentView.showInvoiceButton.setTitle(Buttons.Title.invoice, for: .normal)
+            contentView.showInvoiceButton.setTitle(Button.Title.invoice, for: .normal)
         default:
             Void()
         }
@@ -71,7 +76,7 @@ final class SingleOrderViewController: BaseViewController<SingleOrderView> {
     }
 }
 
-    //MARK: - Extension
+    //MARK: - Extensions
 
 extension SingleOrderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
