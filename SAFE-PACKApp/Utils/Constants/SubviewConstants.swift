@@ -16,6 +16,8 @@ enum Subview {
     static let numberOfLines: Int = 0
     static let borderWidth: CGFloat = 1
     static let borerWidthShopCell: CGFloat = 2
+    static let minimumLineSpacing: CGFloat = 0
+    static let minimumInteritemSpacing: CGFloat = 0
 }
 
 //MARK: - Identifires

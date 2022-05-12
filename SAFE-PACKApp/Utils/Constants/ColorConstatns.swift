@@ -15,4 +15,5 @@ enum Color {
     static let white: UIColor = UIColor(named: "mainWhite")!
     static let font: UIColor = UIColor(named: "fontColor")!
     static let fontShadow: UIColor = UIColor(named: "fontShadow")!
+    static let gray: UIColor = UIColor(named: "gray")!
 }

@@ -13,9 +13,6 @@ enum TextFields {
         static let emailField: String = "  E-mail..."
         static let passwordField: String = "  Password..."
         static let repeatPasswordField: String = "  Repeat password"
-        static let l: String = "L: "
-        static let w: String = "W: "
-        static let h: String = "H: "
     }
     
     enum Size {

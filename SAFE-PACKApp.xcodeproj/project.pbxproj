@@ -56,7 +56,6 @@
 		A8F4E7C52812CA1700681B48 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7C42812CA1700681B48 /* OrdersTableViewCell.swift */; };
 		A8F4E7CE2817382900681B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7CD2817382900681B48 /* ResetPasswordViewController.swift */; };
 		A8F4E7D02817383B00681B48 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7CF2817383B00681B48 /* ResetPasswordView.swift */; };
-		A8F4E7D228180FB300681B48 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7D128180FB300681B48 /* MailSender.swift */; };
 		A8F4E7D9281C06CB00681B48 /* ConstraintsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7D8281C06CB00681B48 /* ConstraintsConstant.swift */; };
 		A8F4E7DB281C095300681B48 /* ImageConstatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7DA281C095300681B48 /* ImageConstatns.swift */; };
 		A8F4E7DD281C099A00681B48 /* ColorConstatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F4E7DC281C099A00681B48 /* ColorConstatns.swift */; };
@@ -113,7 +112,6 @@
 		A8F4E7C42812CA1700681B48 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
 		A8F4E7CD2817382900681B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A8F4E7CF2817383B00681B48 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
-		A8F4E7D128180FB300681B48 /* MailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
 		A8F4E7D8281C06CB00681B48 /* ConstraintsConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsConstant.swift; sourceTree = "<group>"; };
 		A8F4E7DA281C095300681B48 /* ImageConstatns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstatns.swift; sourceTree = "<group>"; };
 		A8F4E7DC281C099A00681B48 /* ColorConstatns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstatns.swift; sourceTree = "<group>"; };
@@ -164,7 +162,7 @@
 			children = (
 				A85FB90327FC4723001E8BF9 /* AppDelegate.swift */,
 				A85FB90527FC4723001E8BF9 /* SceneDelegate.swift */,
-				A85FB91B27FC4852001E8BF9 /* Views */,
+				A85FB91B27FC4852001E8BF9 /* Features */,
 				A85FB91A27FC481B001E8BF9 /* Utils */,
 				A85FB91927FC4815001E8BF9 /* Models */,
 				A85FB91727FC47FB001E8BF9 /* Resources */,
@@ -203,12 +201,11 @@
 				A85FB92A27FDB64F001E8BF9 /* FirebaseClient.swift */,
 				A8E33FA72809801500230C2E /* UserSession.swift */,
 				A8F4E7BE2810660C00681B48 /* Basket.swift */,
-				A8F4E7D128180FB300681B48 /* MailSender.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		A85FB91B27FC4852001E8BF9 /* Views */ = {
+		A85FB91B27FC4852001E8BF9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
 				A85FB95E2804A278001E8BF9 /* Account */,
@@ -216,7 +213,7 @@
 				A85FB92C27FDE96D001E8BF9 /* Login */,
 				A85FB92227FC4EC2001E8BF9 /* Welcome */,
 			);
-			path = Views;
+			path = Features;
 			sourceTree = "<group>";
 		};
 		A85FB92227FC4EC2001E8BF9 /* Welcome */ = {
@@ -447,7 +444,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F4E7D228180FB300681B48 /* MailSender.swift in Sources */,
 				A8F4E7E1281C0A7F00681B48 /* TextFieldConstants.swift in Sources */,
 				A8F4E7DF281C09CF00681B48 /* AlertConstatnts.swift in Sources */,
 				A8E33FC4280EFF2C00230C2E /* InvoiceViewController.swift in Sources */,

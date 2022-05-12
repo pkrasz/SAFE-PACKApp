@@ -45,6 +45,12 @@ enum Labels {
         static let slash = "/"
         static let dash = "-"
         static let resetYourPassword: String = "Reset your password"
+        static let length: String = "Length: "
+        static let width: String = "Width: "
+        static let height: String = "Height: "
+        static let inPost: String = "InPost "
+        static let dhl: String = "DHL "
+        static let pocztex: String = "Pocztex "
 
     }
     

@@ -6,31 +6,21 @@
 //
 
 import Foundation
-import CoreImage
 
-class Basket {
+final class Basket {
     
     //MARK: - Properties
     
     var productsList: [BasketProduct] = [] {
         didSet {
-            basketValue = 0
-            for product in productsList {
-                basketValue += product.totalPrice
-                
-                if product.amount > 2000 {
-                    if leadTime == LeadTime.fourWeeks {
-                        leadTime = LeadTime.eightWeeks
-                    }
-                }
-            }
+           recalculationBasketValue()
         }
     }
     var basketValue: Double = 0
-    var orderNumber: String = ""
+    var orderNumber: String = Empty.string
     var leadTime: String = LeadTime.fourWeeks
-    var deliveryAddress: String = ""
-    var dateOfOrder: String = ""
+    var deliveryAddress: String = Empty.string
+    var dateOfOrder: String = Empty.string
     
     static let shared = Basket()
     
@@ -42,15 +32,25 @@ class Basket {
 
     //MARK: - Methods
     
+    func recalculationBasketValue() {
+        basketValue = 0
+        for product in productsList {
+            basketValue += product.totalPrice
+            
+            if product.amount > Constants.maxProductAmount {
+                    leadTime = LeadTime.eightWeeks
+            }
+        }
+    }
+    
     func reloadBasket() {
-        
         let currentDataTime = Date()
         let formatter = DateFormatter()
         formatter.timeStyle = .none
         formatter.dateStyle = .short
         var dataTimeString = formatter.string(from: currentDataTime)
         dateOfOrder = dataTimeString
-        formatter.dateFormat = "HHmmss"
+        formatter.dateFormat = Constants.dateForamt
         dataTimeString = formatter.string(from: currentDataTime)
         
         FirebaseClient.shared.getAccountInfo(userUID: UserSession.shared.UserInfo(about: User.id)) { [weak self] user in
@@ -63,7 +63,6 @@ class Basket {
     }
     
     func addToBasket(_ amount: Int, of product: Product) {
-        
         var productInBasket = false
         
         for index in 0..<productsList.count {
@@ -76,7 +75,6 @@ class Basket {
         }
         
         if productInBasket == false {
-            
             let totalPrice = Double(amount) * product.price
             let basketProduct = BasketProduct(product: product, amount: amount, totalPrice: totalPrice)
             productsList.append(basketProduct)
@@ -84,7 +82,6 @@ class Basket {
     }
     
     func removeFromBasket( product: BasketProduct) {
-        
         for index in 0..<productsList.count {
             if productsList[index] == product {
                 productsList.remove(at: index)
@@ -94,14 +91,20 @@ class Basket {
     }
     
     func completeOrder(completion: @escaping (Order) -> Void) {
-        
         let order = Order(productsList: productsList, orderNumber: orderNumber, orderPrice: basketValue, status: StatusInt.awaitingAccepted, dateOfTheOrder: dateOfOrder, deliveryAddress: deliveryAddress, leadTime: leadTime, documentName: Labels.Text.dash)
         completion(order)
         
         productsList.removeAll()
         basketValue = 0
+        leadTime = LeadTime.fourWeeks
         reloadBasket()
-        
     }
 }
 
+    //MARK: - Extensions
+extension Basket {
+    enum Constants {
+        static let maxProductAmount: Int = 2000
+        static let dateForamt: String = "HHmmss"
+    }
+}

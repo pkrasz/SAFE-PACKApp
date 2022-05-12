@@ -33,11 +33,11 @@ final class UserSession {
     func UserInfo(about: String) -> String {
         if about == User.id {
             let uid = auth?.currentUser?.uid
-            guard let uid = uid else {return ""}
+            guard let uid = uid else {return Empty.string}
             return uid
         } else {
             let email = auth?.currentUser?.email
-            guard let email = email else {return ""}
+            guard let email = email else {return Empty.string}
             return email
             
         }
@@ -48,7 +48,7 @@ final class UserSession {
                 guard let error = error else {return}
                 completion(error.localizedDescription, false)
             } else {
-                completion("", true)
+                completion(Empty.string, true)
             }
         }
     }
@@ -59,7 +59,7 @@ final class UserSession {
                 guard let error = error else {return}
                 completion(error.localizedDescription, false)
             } else {
-                completion("", true)
+                completion(Empty.string, true)
             }
         }
     }
@@ -70,7 +70,7 @@ final class UserSession {
                 guard let error = error else {return}
                 completion(error.localizedDescription, false)
             } else {
-                completion("", true)
+                completion(Empty.string, true)
             }
         }
     }
@@ -79,8 +79,15 @@ final class UserSession {
         do {
             try auth?.signOut()
         } catch let signOutError as NSError {
-            print("Error!: \(signOutError)")
+            print(Constatns.error + signOutError.localizedDescription)
         }
     }
-    
+}
+
+    //MARK: Extensions
+
+extension UserSession {
+    enum Constatns {
+        static let error: String = "Error! : "
+    }
 }

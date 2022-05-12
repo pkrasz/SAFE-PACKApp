@@ -35,39 +35,39 @@ final class FirebaseClient {
         let orderID = String(order.orderNumber)
         
         do {
-            try db?.collection(userUID).document("ordersData").collection("orders").document(orderID).setData(from: order)
+            try db?.collection(userUID).document(Constants.ordersData).collection(Constants.orders).document(orderID).setData(from: order)
             completion(true)
         } catch let error {
-            print("Error writing city to Firestore: \(error)")
+            print(Constants.error + error.localizedDescription)
             completion(false)
         }
     }
     
     func createUserInfo(userUID: String, name: String, NIP: Int, address: String) {
         db?.collection(userUID)
-            .document("accountInfo").setData(["companyName" : name, "NIP" : NIP, "address" : address])
+            .document(Constants.accountInfo).setData([Constants.companyName : name, Constants.NIP : NIP, Constants.address : address])
     }
     
     func updateUserInfo(userUID: String, name: String, NIP: Int, address: String) {
         db?.collection(userUID)
-            .document("accountInfo").updateData(["companyName" : name, "NIP" : NIP, "address" : address])
+            .document(Constants.accountInfo).updateData([Constants.companyName : name, Constants.NIP : NIP, Constants.address : address])
     }
     
     func getAccountInfo(userUID: String, completion: @escaping (UserInfo) -> Void) {
-        db?.collection(userUID).document("accountInfo").getDocument(as: UserInfo.self) { result in
+        db?.collection(userUID).document(Constants.accountInfo).getDocument(as: UserInfo.self) { result in
             switch result {
             case.success(let userInfo):
                 completion(userInfo)
             case.failure(let error):
-                print("ERROR! : \(error)")
+                print(Constants.error + error.localizedDescription)
             }
         }
     }
     
     func getProducts(completion: @escaping ([Product]) -> Void) {
-        db?.collection("Products").getDocuments() { (querySnapshot, err) in
+        db?.collection(Constants.products).getDocuments() { (querySnapshot, err) in
             if let err = err {
-                print("Error getting documents: \(err)")
+                print(Constants.error + err.localizedDescription)
             } else {
                 var products: [Product] = []
                 for document in querySnapshot!.documents {
@@ -81,9 +81,9 @@ final class FirebaseClient {
     }
     
     func getOrders(userID: String, completion: @escaping ([Order]) -> Void) {
-        db?.collection(userID).document("ordersData").collection("orders").getDocuments() { (querySnapshot, err) in
+        db?.collection(userID).document(Constants.ordersData).collection(Constants.orders).getDocuments() { (querySnapshot, err) in
             if let err = err {
-                print("Error getting documents: \(err)")
+                print(Constants.error + err.localizedDescription)
             } else {
                 var orders: [Order] = []
                 for document in querySnapshot!.documents {
@@ -97,7 +97,7 @@ final class FirebaseClient {
     }
     
     func setImage(name: String, completion: @escaping (UIImage?) -> Void) {
-        let fileName: String = "images/\(name).png"
+        let fileName: String = Constants.images + name + Constants.png
         let imageRef = storageRef?.child(fileName)
         imageRef?.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
@@ -112,7 +112,7 @@ final class FirebaseClient {
     func addInvoiceFolders(userName: String, userID: String, orderNumber: String) {
         let data = Data()
         let folderName: String = userName + Labels.Text.dash + userID
-        let ghostDocument: String = "invoices.txt"
+        let ghostDocument: String = Constants.invoiceTxt
         let fileName: String = folderName + Labels.Text.slash + orderNumber + Labels.Text.slash + ghostDocument
         let imageRef = storageRef?.child(fileName)
         imageRef?.putData(data, metadata: nil) { (metadata, error) in
@@ -144,5 +144,22 @@ final class FirebaseClient {
                 completion(image)
             }
         }
+    }
+}
+
+    //MARK: - Extensions
+extension FirebaseClient {
+    enum Constants {
+        static let ordersData: String = "ordersData"
+        static let orders: String = "orders"
+        static let accountInfo: String = "accountInfo"
+        static let companyName: String = "companyName"
+        static let NIP: String = "NIP"
+        static let address: String = "address"
+        static let products: String = "Products"
+        static let invoiceTxt: String = "invoices.txt"
+        static let images: String = "images/"
+        static let png: String = ".png"
+        static let error: String = "Error! : "
     }
 }
