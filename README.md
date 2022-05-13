@@ -19,7 +19,7 @@ This iOS application allows you to easily place orders for packaging to B2B cust
 - **OOP** (object-oriented programming)
 - Clousures
 
-## Author
+## Author (code & graphic design)
 
 Paweł Kraszewski
 
